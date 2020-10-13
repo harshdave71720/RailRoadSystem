@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -26,8 +27,19 @@ namespace RailRoad.Web.Controllers
 
         public IActionResult Index()
         {
-            var sites = this.SiteManager.RetrieveSite(1);
-            return View(new List<Site> {sites});
+            var sites = this.SiteManager.RetrieveSites();
+            return View(sites);
+        }
+
+        public IActionResult AddSite()
+        {
+            return View();
+        }
+
+        public IActionResult CreateSite(Site site)
+        {
+            this.SiteManager.CreateSite(site);
+            return RedirectToAction("Index");
         }
     }
 }
