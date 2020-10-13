@@ -7,13 +7,13 @@ namespace RailRoad.DataPersistence.Repositories
 {
     public interface ISiteRepository : RepositoryBase
     {
-        public Site SaveSite(Site Site);
+        public Site CreateSite(Site site);
 
-        public Site GetSite(int id, bool includeTripCharges = false, bool includeTripsRecords = false);
+        public Site RetrieveSite(int id);
 
-        public Site[] GetSites(bool includeTripCharges = false, bool includeTripsRecords = false);
+        public Site[] RetrieveSites();
 
-        public Site UpdateSite(Site Site);
+        public Site UpdateSite(Site site);
 
         public Site DeleteSite(int id);
 

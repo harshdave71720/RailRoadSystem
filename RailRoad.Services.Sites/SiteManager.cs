@@ -26,7 +26,7 @@ namespace RailRoad.Services.Sites
         {            
             try
             {
-                return this.SiteRepository.SaveSite(site);
+                return this.SiteRepository.CreateSite(site);
             }
             catch (Exception ex)
             {
@@ -42,7 +42,7 @@ namespace RailRoad.Services.Sites
         {            
             try
             {
-                return this.SiteRepository.GetSite(id, true);        
+                return this.SiteRepository.RetrieveSite(id);        
             }
             catch (Exception ex)
             {
@@ -58,7 +58,11 @@ namespace RailRoad.Services.Sites
         {
             try
             {
-                Site[] sites =orderByName ? this.SiteRepository.GetSites().OrderBy(x => x.Name).ToArray(): this.SiteRepository.GetSites();
+                Site[] sites = this.SiteRepository.RetrieveSites();
+                if(orderByName)
+                {
+                    sites = sites.OrderBy(s => s.Name).ToArray();
+                }
                 return sites;
             }
             catch (Exception ex)
@@ -73,37 +77,10 @@ namespace RailRoad.Services.Sites
 
         public Site[] RetrieveSites(int[] ids, bool orderByName = false)
         {
-            try
-            {
-                Site[] sites = orderByName ? this.SiteRepository.GetSites().OrderBy(x => x.Name).ToArray() : this.SiteRepository.GetSites();
-                return sites;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                this.SiteRepository.Dispose();
-            }
+            throw new NotImplementedException();           
         }
 
-        public Site RetrieveSiteWithTripsRecords(int id)
-        {
-            try
-            {
-                return this.SiteRepository.GetSite(id, true, true);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                this.SiteRepository.Dispose();
-            }
-        }
-
+        
         public Site UpdateSite(Site site)
         {
             try

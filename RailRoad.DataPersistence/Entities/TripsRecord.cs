@@ -15,30 +15,24 @@ namespace RailRoad.DataPersistence.Entities
         public int Id { get; set; }
 
         [Required]
-        [Column("TRIPS_DATE", TypeName = "DATE")]
+        [Column("TRIPS_DATE")]
         public DateTime Date { get; set; }
 
         [Required]
-        [Column("TRIPS_COUNT", TypeName = "INT UNSIGNED")]
+        [Column("TRIPS_COUNT")]
         public  int TripsCount { get; set; }     
-
-        [Column(TypeName = "DECIMAL(10, 2)")]        
-        public double Revenue { get; set; }
-
+        
         [Required]
-        [Column("TRUCK_CAPACITY", TypeName = "DECIMAL(4, 2)")]
+        [Column("TRUCK_CAPACITY")]
         public double TruckCapacity { get; set; }
 
         [Required]
-        [Column("DIESEL_QUANTITY", TypeName = "DECIMAL(6, 2)")]
+        [Column("DIESEL_QUANTITY")]
         public double DieselQuantity { get; set; }
 
         [Required]
-        [Column("DIESEL_PRICE", TypeName = "DECIMAL(6, 2)")]
-        public double DieselPrice { get; set; }
-
-        [MaxLength(100)]
-        public string Chainage { get; set; }
+        [Column("DIESEL_PRICE")]
+        public double DieselPrice { get; set; }        
         
         public Site Site { get; set; }
 
@@ -50,7 +44,8 @@ namespace RailRoad.DataPersistence.Entities
         public TripCharges TripCharges { get; set; }
 
         [Column("TRIPCHARGES")]
+
         [ForeignKey("TripCharges")]
-        public int TripChargesId { get; set; }
+        public int? TripChargesId { get; set; }
     }
 }

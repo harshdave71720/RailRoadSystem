@@ -15,7 +15,7 @@ namespace RailRoad.Services.Sites
 
         public Site[] RetrieveSites(int[] ids, bool orderByName = false);        
 
-        public Site RetrieveSiteWithTripsRecords(int id);
+        //public Site RetrieveSiteWithTripsRecords(int id);
 
         public Site UpdateSite(Site site);
 

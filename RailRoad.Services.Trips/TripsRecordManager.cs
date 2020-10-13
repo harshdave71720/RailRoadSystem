@@ -27,7 +27,7 @@ namespace RailRoad.Services.Trips
         {
             try
             {
-                return this.TripsRecordRepository.SaveTripsRecord(tripsRecord);
+                return this.TripsRecordRepository.CreateTripsRecord(tripsRecord);
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace RailRoad.Services.Trips
         {
             try
             {
-                return this.RetrieveTripsRecord(id);
+                return this.TripsRecordRepository.RetrieveTripsRecord(id);
             }
             catch (Exception ex)
             {
@@ -55,29 +55,31 @@ namespace RailRoad.Services.Trips
             }
         }
         
-        public TripsRecord RetrieveTripsRecordWithSite(int id)
-        {
-            try
-            {
-                return this.RetrieveTripsRecordWithSite(id);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                this.TripsRecordRepository.Dispose();
-            }
-        }
+        //public TripsRecord RetrieveTripsRecordWithSite(int id)
+        //{
+        //    try
+        //    {
+        //        return this.TripsRecordRepository.RetrieveTripsRecordWithSite(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        this.TripsRecordRepository.Dispose();
+        //    }
+        //}
 
         public TripsRecord[] RetrieveTripsRecords(bool orderByDate = false)
         {
             try
             {
-                TripsRecord[] records = orderByDate ? 
-                                        this.TripsRecordRepository.GetTripsRecords().OrderBy(x => x.Date).ToArray() :
-                                        this.TripsRecordRepository.GetTripsRecords();
+                TripsRecord[] records = this.TripsRecordRepository.RetrieveTripsRecords();
+                if (orderByDate)
+                {
+                    records = records.OrderBy(r => r.Date).ToArray();
+                }                    
                 return records;
             }
             catch (Exception ex)
@@ -90,32 +92,32 @@ namespace RailRoad.Services.Trips
             }
         }
 
-        public TripsRecord[] RetrieveTripsRecords(int[] id, bool orderByDate = false)
-        {
-            try
-            {
-                TripsRecord[] records = orderByDate ?
-                                        this.TripsRecordRepository.GetTripsRecords().OrderBy(x => x.Date).ToArray() :
-                                        this.TripsRecordRepository.GetTripsRecords();
-                return records;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                this.TripsRecordRepository.Dispose();
-            }
-        }
+        //public TripsRecord[] RetrieveTripsRecords(int[] id, bool orderByDate = false)
+        //{
+        //    try
+        //    {
+        //        TripsRecord[] records = orderByDate ?
+        //                                this.TripsRecordRepository.RetrieveTripsRecords().OrderBy(x => x.Date).ToArray() :
+        //                                this.TripsRecordRepository.RetrieveTripsRecords();
+        //        return records;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        this.TripsRecordRepository.Dispose();
+        //    }
+        //}
 
         public TripsRecord[] RetrieveTripsRecordsWithSite(int[] id, bool orderByDate = false)
         {
             try
             {
                 TripsRecord[] records = orderByDate ?
-                                       this.TripsRecordRepository.GetTripsRecords(false, true).OrderBy(x => x.Date).ToArray() :
-                                       this.TripsRecordRepository.GetTripsRecords(false, true);
+                                       this.TripsRecordRepository.RetrieveTripsRecords().OrderBy(x => x.Date).ToArray() :
+                                       this.TripsRecordRepository.RetrieveTripsRecords();
                 return records;
             }
             catch (Exception ex)

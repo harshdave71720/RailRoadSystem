@@ -11,15 +11,16 @@ namespace RailRoad.DataPersistence.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("TRIPCHARGES_ID")]
         public int Id { get; set; }
 
-        [Column("EXCAVATION_CHARGE", TypeName = "DECIMAL(4, 2)")]
+        [Column("EXCAVATION_CHARGE")]
         public double ExcavationCharge { get; set; }
 
-        [Column("LNT_BASIC_CHARGE", TypeName = "DECIMAL(4, 2)")]
+        [Column("LNT_BASIC_CHARGE")]
         public double LntBasicCharge { get; set; }
 
-        [Column("LNT_LEADING_CHARGE", TypeName = "DECIMAL(4, 2)")]
+        [Column("LNT_LEADING_CHARGE")]
         public double LntLeadingCharge { get; set; }
     }
 }

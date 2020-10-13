@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RailRoad.DataPersistence.Entities;
 using RailRoad.Services.Sites;
 
 namespace RailRoad.Web.Controllers
@@ -16,11 +17,17 @@ namespace RailRoad.Web.Controllers
         //    this.SiteManager = siteManager;
         //}
 
-       
+
+        //public IActionResult Index()
+        //{
+        //    var sites = this.SiteManager.RetrieveSites();
+        //    return View(sites);
+        //}
+
         public IActionResult Index()
         {
-            var sites = this.SiteManager.RetrieveSites();
-            return View(sites);
+            var sites = this.SiteManager.RetrieveSite(1);
+            return View(new List<Site> {sites});
         }
     }
 }

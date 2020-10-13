@@ -14,11 +14,11 @@ namespace RailRoad.Services.Trips
 
         public TripsRecord RetrieveTripsRecord(int id);
 
-        public TripsRecord RetrieveTripsRecordWithSite(int id);
+        //public TripsRecord RetrieveTripsRecordWithSite(int id);
 
         public TripsRecord[] RetrieveTripsRecords(bool orderByDate = false);
 
-        public TripsRecord[] RetrieveTripsRecords(int[] ids, bool orderByDate = false);
+        //public TripsRecord[] RetrieveTripsRecords(int[] ids, bool orderByDate = false);
 
         public TripsRecord[] RetrieveTripsRecordsWithSite(int[] ids, bool orderByDate = false);
 

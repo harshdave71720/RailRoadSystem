@@ -18,20 +18,19 @@ namespace RailRoad.DataPersistence.Entities
         [MaxLength(50)]        
         public string Name { get; set; }
 
-        [Column("DEF_TRUCK_CAPACITY", TypeName = "DECIMAL(4, 2)")]
+        [Column("DEF_TRUCK_CAPACITY")]
         [Required]
         public double DefaultTruckCapacity { get; set; }             
        
         [Required]
-        [Column(TypeName = "DECIMAL(8, 2)")]
+        [Column("DISTANCE")]
         public int Distance { get; set; }
 
         public TripCharges DefaultTripCharges { get; set; }
 
-        [Column("TRIPCHARGES")]
+        [Column("TRIPCHARGES_ID")]
         [ForeignKey("DefaultTripCharges")]
         public int DefaultTripChargesId { get; set; }
-
 
         public IEnumerable<TripsRecord> TripsRecords { get; set; }     
     }

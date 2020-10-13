@@ -16,59 +16,78 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost:3306;database=RailRoadTemp;user=root");
+            optionsBuilder.UseMySQL("Server = localhost; Database = RailRoad; Uid = root; Pwd = root;");
             base.OnConfiguring(optionsBuilder);
         }
 
-        public TripsRecord DeleteTripsRecord(int id)
+        public Site CreateSite(Site site)
         {
-            throw new NotImplementedException();
+            int id = this.Sites.Add(site).Entity.Id;
+            this.SaveChanges();
+            return this.RetrieveSite(id);
         }
 
-        public TripsRecord GetTripsRecord(int id, bool includeTripCharges = false, bool includeSiteInfo = false)
+        public TripsRecord CreateTripsRecord(TripsRecord tripsRecord)
         {
-            throw new NotImplementedException();
-        }
-
-        public TripsRecord[] GetTripsRecords(bool includeTripCharges = false, bool includeSiteInfo = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TripsRecord SaveTripsRecord(TripsRecord tripsRecord)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TripsRecord UpdateTripsRecord(TripsRecord tripsRecord)
-        {
-            throw new NotImplementedException();
+            int id = this.TripsRecords.Add(tripsRecord).Entity.Id;
+            this.SaveChanges();
+            return this.RetrieveTripsRecord(id);
         }
 
         public Site DeleteSite(int id)
         {
-            throw new NotImplementedException();
+            Site site = this.RetrieveSite(id);
+            if (site == null)
+                return site;
+
+            this.Sites.Remove(site);
+            this.SaveChanges();
+            return site;
         }
 
-        public Site GetSite(int id, bool includeTripCharges = false, bool includeTripsRecords = false)
+        public TripsRecord DeleteTripsRecord(int id)
         {
-            throw new NotImplementedException();
+            TripsRecord record = this.RetrieveTripsRecord(id);
+
+            if (record == null) return record;
+
+            this.TripsRecords.Remove(record);
+            this.SaveChanges();
+            return record;
         }
 
-        public Site[] GetSites(bool includeTripCharges = false, bool includeTripsRecords = false)
+        public Site RetrieveSite(int id)
+        {
+            return this.Sites.Find(id);
+        }
+
+        public Site[] RetrieveSites()
         {
             return this.Sites.ToArray();
         }
 
-        public Site SaveSite(Site Site)
+        public TripsRecord RetrieveTripsRecord(int id)
         {
-            throw new NotImplementedException();
+            return this.TripsRecords.Find(id);
         }
 
-        public Site UpdateSite(Site Site)
+        public TripsRecord[] RetrieveTripsRecords()
         {
-            throw new NotImplementedException();
+            return this.TripsRecords.ToArray();
         }
 
-    }    
+        public Site UpdateSite(Site site)
+        {
+            this.Sites.Update(site);
+            this.SaveChanges();
+            return this.RetrieveSite(site.Id);
+        }
+
+        public TripsRecord UpdateTripsRecord(TripsRecord tripsRecord)
+        {
+            this.TripsRecords.Update(tripsRecord);
+            this.SaveChanges();
+            return this.RetrieveTripsRecord(tripsRecord.Id);
+        }
+    }
 }
