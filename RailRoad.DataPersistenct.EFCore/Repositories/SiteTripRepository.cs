@@ -61,9 +61,19 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             return this.Sites.Find(id);
         }
 
+        public Site RetrieveSiteWithTripCharges(int id)
+        {
+            return this.Sites.Include(s => s.DefaultTripCharges).FirstOrDefault(x => x.Id == id);
+        }
+
         public Site[] RetrieveSites()
         {
             return this.Sites.ToArray();
+        }
+
+        public Site[] RetrieveSitesWithTripCharges()
+        {
+            return this.Sites.Include(s => s.DefaultTripCharges).ToArray();
         }
 
         public TripsRecord RetrieveTripsRecord(int id)

@@ -23,7 +23,7 @@ namespace RailRoad.Services.Sites
         }
 
         public Site CreateSite(Site site)
-        {            
+        {
             try
             {
                 return this.SiteRepository.CreateSite(site);
@@ -32,17 +32,33 @@ namespace RailRoad.Services.Sites
             {
                 throw ex;
             }
-            finally 
+            finally
             {
                 this.SiteRepository.Dispose();
             }
         }
 
         public Site RetrieveSite(int id)
-        {            
+        {
             try
             {
-                return this.SiteRepository.RetrieveSite(id);        
+                return this.SiteRepository.RetrieveSite(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.SiteRepository.Dispose();
+            }
+        }
+
+        public Site RetrieveSite(int id, bool includeTripCharges)
+        {
+            try
+            {
+                return this.SiteRepository.RetrieveSiteWithTripCharges(id);
             }
             catch (Exception ex)
             {
@@ -59,7 +75,28 @@ namespace RailRoad.Services.Sites
             try
             {
                 Site[] sites = this.SiteRepository.RetrieveSites();
-                if(orderByName)
+                if (orderByName)
+                {
+                    sites = sites.OrderBy(s => s.Name).ToArray();
+                }
+                return sites;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.SiteRepository.Dispose();
+            }
+        }
+
+        public Site[] RetrieveSites(bool includeTripCharges, bool orderByName = false)
+        {
+            try
+            {
+                Site[] sites = this.SiteRepository.RetrieveSitesWithTripCharges();
+                if (orderByName)
                 {
                     sites = sites.OrderBy(s => s.Name).ToArray();
                 }

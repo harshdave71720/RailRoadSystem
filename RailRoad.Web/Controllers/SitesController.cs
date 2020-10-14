@@ -4,11 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
 using RailRoad.DataPersistence.Entities;
 using RailRoad.Services.Sites;
 
 namespace RailRoad.Web.Controllers
 {
+    [Route("Sites")]
     public class SitesController : Controller
     {
         private ISiteManager SiteManager = new SiteManager();
@@ -27,18 +29,49 @@ namespace RailRoad.Web.Controllers
 
         public IActionResult Index()
         {
-            var sites = this.SiteManager.RetrieveSites();
+            
+            var sites = this.SiteManager.RetrieveSites(true, true);
             return View(sites);
         }
 
+        [Route("AddSite")]
         public IActionResult AddSite()
         {
-            return View();
+            return View("AddEditSite", new Site());
         }
 
-        public IActionResult CreateSite(Site site)
+        [Route("Edit/{id}")]
+        public IActionResult EditSite(int id)
         {
-            this.SiteManager.CreateSite(site);
+            Site site = this.SiteManager.RetrieveSite(id, true);
+            if (site == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("AddEditSite", site);
+        }
+
+        [HttpPost]
+        [Route("AddSite")]
+        public IActionResult AddSite(Site site)
+        {
+            if (site.Id > 0)
+            {
+                this.SiteManager.UpdateSite(site);
+            }
+            else
+            {
+                this.SiteManager.CreateSite(site);
+            }
+            return RedirectToAction("Index");
+        }
+       
+       
+        [Route("Delete/{id}")]
+        //[HttpPost]
+        public IActionResult DeleteSite(int id) 
+        {
+            this.SiteManager.DeleteSite(id);
             return RedirectToAction("Index");
         }
     }

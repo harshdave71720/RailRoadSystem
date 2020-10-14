@@ -11,10 +11,14 @@ namespace RailRoad.Services.Sites
 
         public Site RetrieveSite(int id);
 
+        public Site RetrieveSite(int id, bool includeTripCharges);
+
         public Site[] RetrieveSites(bool orderByName = false);
 
-        public Site[] RetrieveSites(int[] ids, bool orderByName = false);        
+        public Site[] RetrieveSites(bool includeTripCharges, bool orderByName = false);
 
+        public Site[] RetrieveSites(int[] ids, bool orderByName = false);        
+       
         //public Site RetrieveSiteWithTripsRecords(int id);
 
         public Site UpdateSite(Site site);
