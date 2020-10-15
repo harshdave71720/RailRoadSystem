@@ -1,22 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Options;
 using RailRoad.DataPersistence.Entities;
 using RailRoad.DataPersistence.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace RailRoad.DataPersistenct.EFCore.Repositories
 {
     public class SiteTripRepository : DbContext, ISiteRepository, ITripsRecordRepository
-    {
+    {        
         public DbSet<Site> Sites { get; set; }
         public DbSet<TripsRecord> TripsRecords { get; set; }
-        public DbSet<TripCharges> TripCharges { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        
+        public SiteTripRepository()
         {
-            optionsBuilder.UseMySQL("Server = localhost; Database = RailRoad; Uid = root; Pwd = root;");
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {   
+            optionsBuilder.UseMySQL("Server = localhost; Database = RailRoad; Uid = root; Pwd = root;");            
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -63,7 +69,7 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
 
         public Site RetrieveSiteWithTripCharges(int id)
         {
-            return this.Sites.Include(s => s.DefaultTripCharges).FirstOrDefault(x => x.Id == id);
+            return this.Sites.Include(s => s.SiteCharges).FirstOrDefault(x => x.Id == id);
         }
 
         public Site[] RetrieveSites()
@@ -73,7 +79,7 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
 
         public Site[] RetrieveSitesWithTripCharges()
         {
-            return this.Sites.Include(s => s.DefaultTripCharges).ToArray();
+            return this.Sites.Include(s => s.SiteCharges).ToArray();
         }
 
         public TripsRecord RetrieveTripsRecord(int id)

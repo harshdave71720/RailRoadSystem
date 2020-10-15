@@ -67,8 +67,7 @@ namespace RailRoad.Web.Controllers
         }
        
        
-        [Route("Delete/{id}")]
-        //[HttpPost]
+        [Route("Delete/{id}")]        
         public IActionResult DeleteSite(int id) 
         {
             this.SiteManager.DeleteSite(id);

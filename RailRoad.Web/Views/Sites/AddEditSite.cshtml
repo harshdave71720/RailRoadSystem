@@ -9,79 +9,81 @@
             <input asp-for="Distance" value="@Model?.Distance" class="form-control">
             <label asp-for="DefaultTruckCapacity">Truck Capacity</label>
             <input asp-for="DefaultTruckCapacity" value="@Model?.DefaultTruckCapacity" class="form-control">
-            <label asp-for="DefaultTripCharges.ExcavationCharge"> Excavation Charge</label>
-            <input asp-for="DefaultTripCharges.ExcavationCharge" value="@Model?.DefaultTripCharges?.ExcavationCharge" class="form-control">
-            <label asp-for="DefaultTripCharges.LntBasicCharge">LNT Base Charge</label>
-            <input asp-for="DefaultTripCharges.LntBasicCharge" value="@Model?.DefaultTripCharges?.LntBasicCharge" class="form-control">
-            <label asp-for="DefaultTripCharges.LntBasicCharge">LNT Leading Charge</label>
-            <input asp-for="DefaultTripCharges.LntLeadingCharge" value="@Model?.DefaultTripCharges?.LntLeadingCharge" class="form-control">
+            <input hidden asp-for="SiteCharges.Id" value="@Model?.SiteCharges?.Id" class="form-control">
+            <input hidden asp-for="SiteCharges.SiteId" value="@Model?.SiteCharges?.SiteId" class="form-control">
+            <label asp-for="SiteCharges.ExcavationCharge"> Excavation Charge</label>
+            <input asp-for="SiteCharges.ExcavationCharge" value="@Model?.SiteCharges?.ExcavationCharge" class="form-control">
+            <label asp-for="SiteCharges.ExcavationCharge">LNT Base Charge</label>
+            <input asp-for="SiteCharges.LntBasicCharge" value="@Model?.SiteCharges?.LntBasicCharge" class="form-control">
+            <label asp-for="SiteCharges.LntBasicCharge">LNT Leading Charge</label>
+            <input asp-for="SiteCharges.LntLeadingCharge" value="@Model?.SiteCharges?.LntLeadingCharge" class="form-control">
             <br />
             <input type="submit" value="Add Site" class="btn-primary form-control">
             @*<table>
-                    <thead>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <label asp-for="Name">Name</label>
-                            </td>
-                            <td>
-                                <input asp-for="Name" value="@Model?.Name" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label asp-for="Distance">Site Distance</label>
-                            </td>
-                            <td>
-                                <input asp-for="Distance" value="@Model?.Distance" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label asp-for="DefaultTruckCapacity">Truck Capacity</label>
-                            </td>
-                            <td>
-                                <input asp-for="DefaultTruckCapacity" value="@Model?.DefaultTruckCapacity" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label asp-for="DefaultTripCharges.ExcavationCharge"> Excavation Charge</label>
-                            </td>
-                            <td>
-                                <input asp-for="DefaultTripCharges.ExcavationCharge" value="@Model?.DefaultTripCharges?.ExcavationCharge" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label asp-for="DefaultTripCharges.LntBasicCharge">LNT Base Charge</label>
-                            </td>
-                            <td>
-                                <input asp-for="DefaultTripCharges.LntBasicCharge" value="@Model?.DefaultTripCharges?.LntBasicCharge" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label asp-for="DefaultTripCharges.LntBasicCharge">LNT Leading Charge</label>
-                            </td>
-                            <td>
-                                <input asp-for="DefaultTripCharges.LntLeadingCharge" value="@Model?.DefaultTripCharges?.LntLeadingCharge" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="submit" value="Add Site" class="btn-primary form-control">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>*@
+            <thead>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label asp-for="Name">Name</label>
+                    </td>
+                    <td>
+                        <input asp-for="Name" value="@Model?.Name" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Distance">Site Distance</label>
+                    </td>
+                    <td>
+                        <input asp-for="Distance" value="@Model?.Distance" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="DefaultTruckCapacity">Truck Capacity</label>
+                    </td>
+                    <td>
+                        <input asp-for="DefaultTruckCapacity" value="@Model?.DefaultTruckCapacity" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="DefaultTripCharges.ExcavationCharge"> Excavation Charge</label>
+                    </td>
+                    <td>
+                        <input asp-for="DefaultTripCharges.ExcavationCharge" value="@Model?.DefaultTripCharges?.ExcavationCharge" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="DefaultTripCharges.LntBasicCharge">LNT Base Charge</label>
+                    </td>
+                    <td>
+                        <input asp-for="DefaultTripCharges.LntBasicCharge" value="@Model?.DefaultTripCharges?.LntBasicCharge" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="DefaultTripCharges.LntBasicCharge">LNT Leading Charge</label>
+                    </td>
+                    <td>
+                        <input asp-for="DefaultTripCharges.LntLeadingCharge" value="@Model?.DefaultTripCharges?.LntLeadingCharge" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Add Site" class="btn-primary form-control">
+                    </td>
+                </tr>
+            </tbody>
+        </table>*@
         </form>
     </div>
 </div>
