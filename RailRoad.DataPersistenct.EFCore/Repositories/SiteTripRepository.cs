@@ -3,6 +3,7 @@ using RailRoad.DataPersistence.Entities;
 using RailRoad.DataPersistence.Repositories;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace RailRoad.DataPersistenct.EFCore.Repositories
 {
@@ -28,6 +29,7 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             {
                 optionsBuilder.UseMySQL(ConnectionString);
             }
+            optionsBuilder.UseLoggerFactory(LoggerFactory.Create((builder) => builder.AddConsole()));
             base.OnConfiguring(optionsBuilder);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RailRoad.DataPersistence.Entities;
 using RailRoad.Services.Sites;
 
@@ -9,9 +10,12 @@ namespace RailRoad.Web.Controllers
     {
         private ISiteManager SiteManager;
 
-        public SitesController(ISiteManager siteManager)
+        private ILogger<SitesController> Logger;
+
+        public SitesController(ISiteManager siteManager, ILogger<SitesController> logger)
         {
             this.SiteManager = siteManager;
+            this.Logger = logger;
         }
 
         public IActionResult Index()

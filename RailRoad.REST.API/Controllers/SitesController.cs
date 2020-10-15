@@ -12,12 +12,6 @@ namespace RailRoad.REST.API.Controllers
         public SitesController(ISiteManager siteManager)
         {
             this.SiteManager = siteManager;
-        }
-
-        public SitesController()
-        {
-            this.SiteManager = new SiteManager();
-        }
-        
+        }          
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using MySql.Data.EntityFrameworkCore.Extensions;
 using RailRoad.DataPersistence.Repositories;
 using RailRoad.DataPersistenct.EFCore.Repositories;
@@ -31,8 +32,7 @@ namespace RailRoad.Web
         {
             services.AddControllers();
             services.AddControllersWithViews();
-            services.AddEntityFrameworkMySQL()
-                    .AddDbContext<SiteTripRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
+            services.AddDbContext<SiteTripRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
             services.AddScoped<ISiteRepository, SiteTripRepository>();
             services.AddScoped<ITripsRecordRepository, SiteTripRepository>();
             services.AddScoped<ISiteManager, SiteManager>();
