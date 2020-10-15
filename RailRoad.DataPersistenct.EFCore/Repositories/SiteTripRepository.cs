@@ -67,7 +67,7 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             return this.Sites.Find(id);
         }
 
-        public Site RetrieveSiteWithTripCharges(int id)
+        public Site RetrieveSiteWithCharges(int id)
         {
             return this.Sites.Include(s => s.SiteCharges).FirstOrDefault(x => x.Id == id);
         }
@@ -77,7 +77,7 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             return this.Sites.ToArray();
         }
 
-        public Site[] RetrieveSitesWithTripCharges()
+        public Site[] RetrieveSitesWithCharges()
         {
             return this.Sites.Include(s => s.SiteCharges).ToArray();
         }

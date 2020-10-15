@@ -58,7 +58,7 @@ namespace RailRoad.Services.Sites
         {
             try
             {
-                return this.SiteRepository.RetrieveSiteWithTripCharges(id);
+                return this.SiteRepository.RetrieveSiteWithCharges(id);
             }
             catch (Exception ex)
             {
@@ -95,7 +95,7 @@ namespace RailRoad.Services.Sites
         {
             try
             {
-                Site[] sites = this.SiteRepository.RetrieveSitesWithTripCharges();
+                Site[] sites = this.SiteRepository.RetrieveSitesWithCharges();
                 if (orderByName)
                 {
                     sites = sites.OrderBy(s => s.Name).ToArray();
