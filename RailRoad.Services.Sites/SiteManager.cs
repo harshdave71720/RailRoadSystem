@@ -17,11 +17,6 @@ namespace RailRoad.Services.Sites
             this.SiteRepository = siteRepository;
         }
 
-        public SiteManager()
-        {
-            this.SiteRepository = new SiteTripRepository();
-        }
-
         public Site CreateSite(Site site)
         {
             try

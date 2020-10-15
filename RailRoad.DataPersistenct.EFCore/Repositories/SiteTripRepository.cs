@@ -1,14 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
-using Microsoft.Extensions.Options;
 using RailRoad.DataPersistence.Entities;
 using RailRoad.DataPersistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace RailRoad.DataPersistenct.EFCore.Repositories
 {
@@ -16,13 +10,24 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
     {        
         public DbSet<Site> Sites { get; set; }
         public DbSet<TripsRecord> TripsRecords { get; set; }
-        
-        public SiteTripRepository()
-        {
+
+        private static string ConnectionString;
+
+        public SiteTripRepository(DbContextOptions<SiteTripRepository> dbContextOptions) : base(dbContextOptions)
+        {                            
         }
+
+        public SiteTripRepository(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {   
-            optionsBuilder.UseMySQL("Server = localhost; Database = RailRoad; Uid = root; Pwd = root;");            
+        {
+            if (ConnectionString != null)
+            {
+                optionsBuilder.UseMySQL(ConnectionString);
+            }
             base.OnConfiguring(optionsBuilder);
         }
 

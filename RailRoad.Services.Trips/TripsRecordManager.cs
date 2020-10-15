@@ -16,12 +16,7 @@ namespace RailRoad.Services.Trips
         public TripsRecordManager(ITripsRecordRepository tripsRecordRepository)
         {
             this.TripsRecordRepository = tripsRecordRepository;
-        }
-
-        public TripsRecordManager()
-        {
-            this.TripsRecordRepository = new SiteTripRepository();
-        }
+        }        
 
         public TripsRecord CreateTripsRecord(TripsRecord tripsRecord)
         {
