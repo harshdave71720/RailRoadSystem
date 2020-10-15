@@ -11,7 +11,11 @@ namespace RailRoad.DataPersistence.Repositories
 
         public Site RetrieveSite(int id);
 
+        public Site RetrieveSiteWithCharges(int id);
+
         public Site[] RetrieveSites();
+
+        public Site[] RetrieveSitesWithCharges();
 
         public Site UpdateSite(Site site);
 

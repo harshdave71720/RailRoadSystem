@@ -6,12 +6,11 @@ using System.Text;
 
 namespace RailRoad.DataPersistence.Entities
 {
-    [Table("TRIPCHARGES")]
-    public class TripCharges
+    public class OperatingCharges
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("TRIPCHARGES_ID")]
+        [Column("CHARGES_ID")]
         public int Id { get; set; }
 
         [Column("EXCAVATION_CHARGE")]

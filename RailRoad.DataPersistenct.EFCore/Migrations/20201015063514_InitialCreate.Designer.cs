@@ -9,7 +9,7 @@ using RailRoad.DataPersistenct.EFCore.Repositories;
 namespace RailRoad.DataPersistenct.EFCore.Migrations
 {
     [DbContext(typeof(SiteTripRepository))]
-    [Migration("20201013064318_InitialCreate")]
+    [Migration("20201015063514_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,10 +24,6 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("SITE_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DefaultTripChargesId")
-                        .HasColumnName("TRIPCHARGES_ID")
                         .HasColumnType("int");
 
                     b.Property<double>("DefaultTruckCapacity")
@@ -45,16 +41,14 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DefaultTripChargesId");
-
                     b.ToTable("SITE");
                 });
 
-            modelBuilder.Entity("RailRoad.DataPersistence.Entities.TripCharges", b =>
+            modelBuilder.Entity("RailRoad.DataPersistence.Entities.SiteCharges", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("TRIPCHARGES_ID")
+                        .HasColumnName("CHARGES_ID")
                         .HasColumnType("int");
 
                     b.Property<double>("ExcavationCharge")
@@ -69,9 +63,16 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
                         .HasColumnName("LNT_LEADING_CHARGE")
                         .HasColumnType("double");
 
+                    b.Property<int>("SiteId")
+                        .HasColumnName("SITE_ID")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TRIPCHARGES");
+                    b.HasIndex("SiteId")
+                        .IsUnique();
+
+                    b.ToTable("SITECHARGES");
                 });
 
             modelBuilder.Entity("RailRoad.DataPersistence.Entities.TripsRecord", b =>
@@ -97,10 +98,6 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
                         .HasColumnName("SITE_ID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TripChargesId")
-                        .HasColumnName("TRIPCHARGES")
-                        .HasColumnType("int");
-
                     b.Property<int>("TripsCount")
                         .HasColumnName("TRIPS_COUNT")
                         .HasColumnType("int");
@@ -113,16 +110,45 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
 
                     b.HasIndex("SiteId");
 
-                    b.HasIndex("TripChargesId");
-
                     b.ToTable("TRIPSRECORD");
                 });
 
-            modelBuilder.Entity("RailRoad.DataPersistence.Entities.Site", b =>
+            modelBuilder.Entity("RailRoad.DataPersistence.Entities.TripsRecordCharges", b =>
                 {
-                    b.HasOne("RailRoad.DataPersistence.Entities.TripCharges", "DefaultTripCharges")
-                        .WithMany()
-                        .HasForeignKey("DefaultTripChargesId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("CHARGES_ID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ExcavationCharge")
+                        .HasColumnName("EXCAVATION_CHARGE")
+                        .HasColumnType("double");
+
+                    b.Property<double>("LntBasicCharge")
+                        .HasColumnName("LNT_BASIC_CHARGE")
+                        .HasColumnType("double");
+
+                    b.Property<double>("LntLeadingCharge")
+                        .HasColumnName("LNT_LEADING_CHARGE")
+                        .HasColumnType("double");
+
+                    b.Property<int>("TripsRecordId")
+                        .HasColumnName("TRIPSRECORD_ID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripsRecordId")
+                        .IsUnique();
+
+                    b.ToTable("TRIPSRECORDCHARGES");
+                });
+
+            modelBuilder.Entity("RailRoad.DataPersistence.Entities.SiteCharges", b =>
+                {
+                    b.HasOne("RailRoad.DataPersistence.Entities.Site", "Site")
+                        .WithOne("SiteCharges")
+                        .HasForeignKey("RailRoad.DataPersistence.Entities.SiteCharges", "SiteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -134,10 +160,15 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.HasOne("RailRoad.DataPersistence.Entities.TripCharges", "TripCharges")
-                        .WithMany()
-                        .HasForeignKey("TripChargesId");
+            modelBuilder.Entity("RailRoad.DataPersistence.Entities.TripsRecordCharges", b =>
+                {
+                    b.HasOne("RailRoad.DataPersistence.Entities.TripsRecord", "TripsRecord")
+                        .WithOne("TripCharges")
+                        .HasForeignKey("RailRoad.DataPersistence.Entities.TripsRecordCharges", "TripsRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

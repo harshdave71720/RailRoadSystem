@@ -7,6 +7,7 @@ using RailRoad.Services.Trips;
 
 namespace RailRoad.Web.Controllers
 {
+    [Route("TripsRecords")]
     public class TripsRecordsController : Controller
     {
         private ITripsRecordManager TripsRecordManager;

@@ -26,11 +26,8 @@ namespace RailRoad.DataPersistence.Entities
         [Column("DISTANCE")]
         public int Distance { get; set; }
 
-        public TripCharges DefaultTripCharges { get; set; }
-
-        [Column("TRIPCHARGES_ID")]
-        [ForeignKey("DefaultTripCharges")]
-        public int DefaultTripChargesId { get; set; }
+        [Required]
+        public SiteCharges SiteCharges { get; set; }        
 
         public IEnumerable<TripsRecord> TripsRecords { get; set; }     
     }

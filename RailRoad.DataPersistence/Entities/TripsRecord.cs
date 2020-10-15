@@ -41,11 +41,7 @@ namespace RailRoad.DataPersistence.Entities
         [ForeignKey("Site")]
         public int SiteId { get; set; }
        
-        public TripCharges TripCharges { get; set; }
-
-        [Column("TRIPCHARGES")]
-
-        [ForeignKey("TripCharges")]
-        public int? TripChargesId { get; set; }
+        [Required]
+        public TripsRecordCharges TripCharges { get; set; }        
     }
 }
