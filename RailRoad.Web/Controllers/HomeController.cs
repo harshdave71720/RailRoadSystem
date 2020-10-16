@@ -19,8 +19,7 @@ namespace RailRoad.Web.Controllers
         }
 
         public IActionResult Index()
-        {
-            _logger.LogInformation("Some Info");
+        {           
             return View();
         }
 
