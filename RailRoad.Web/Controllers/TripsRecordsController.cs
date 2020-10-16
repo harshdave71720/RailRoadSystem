@@ -17,10 +17,10 @@ namespace RailRoad.Web.Controllers
             this.TripsRecordManager = tripsRecordManager;
         }
 
-        public TripsRecordsController()
-        {
-            this.TripsRecordManager = new TripsRecordManager();
-        }
+        //public TripsRecordsController()
+        //{
+        //    this.TripsRecordManager = new TripsRecordManager();
+        //}
         public IActionResult Index()
         {
             return View();

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RailRoad.DataPersistence.Entities;
 using RailRoad.Services.Sites;
 
@@ -13,24 +8,19 @@ namespace RailRoad.Web.Controllers
     [Route("Sites")]
     public class SitesController : Controller
     {
-        private ISiteManager SiteManager = new SiteManager();
+        private ISiteManager SiteManager;
 
-        //public SitesController(ISiteManager siteManager)
-        //{
-        //    this.SiteManager = siteManager;
-        //}
+        private ILogger<SitesController> Logger;
 
-
-        //public IActionResult Index()
-        //{
-        //    var sites = this.SiteManager.RetrieveSites();
-        //    return View(sites);
-        //}
+        public SitesController(ISiteManager siteManager, ILogger<SitesController> logger)
+        {
+            this.SiteManager = siteManager;
+            this.Logger = logger;
+        }
 
         public IActionResult Index()
-        {
-            
-            var sites = this.SiteManager.RetrieveSites(true, true);
+        {            
+            Site[] sites = this.SiteManager.RetrieveSites(true, true);
             return View(sites);
         }
 

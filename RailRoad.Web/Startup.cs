@@ -5,9 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using MySql.Data.EntityFrameworkCore.Extensions;
+using RailRoad.DataPersistence.Repositories;
+using RailRoad.DataPersistenct.EFCore.Repositories;
+using RailRoad.Services.Sites;
+using RailRoad.Services.Trips;
 
 namespace RailRoad.Web
 {
@@ -25,6 +32,11 @@ namespace RailRoad.Web
         {
             services.AddControllers();
             services.AddControllersWithViews();
+            services.AddDbContext<SiteTripRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
+            services.AddScoped<ISiteRepository, SiteTripRepository>();
+            services.AddScoped<ITripsRecordRepository, SiteTripRepository>();
+            services.AddScoped<ISiteManager, SiteManager>();
+            services.AddScoped<ITripsRecordManager, TripsRecordManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
