@@ -1,4 +1,5 @@
-﻿using RailRoad.DataPersistence.Entities;
+﻿using Microsoft.Extensions.Logging;
+using RailRoad.DataPersistence.Entities;
 using RailRoad.DataPersistence.Repositories;
 using RailRoad.DataPersistenct.EFCore.Repositories;
 using System;
@@ -12,9 +13,11 @@ namespace RailRoad.Services.Trips
     public class TripsRecordManager : ITripsRecordManager
     {
         private ITripsRecordRepository TripsRecordRepository;
+        private ILogger<TripsRecordManager> Logger;
 
-        public TripsRecordManager(ITripsRecordRepository tripsRecordRepository)
+        public TripsRecordManager(ILogger<TripsRecordManager> logger,ITripsRecordRepository tripsRecordRepository)
         {
+            this.Logger = logger;
             this.TripsRecordRepository = tripsRecordRepository;
         }        
 

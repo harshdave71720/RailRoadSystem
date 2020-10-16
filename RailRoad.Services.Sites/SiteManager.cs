@@ -1,4 +1,5 @@
-﻿using RailRoad.DataPersistence.Entities;
+﻿using Microsoft.Extensions.Logging;
+using RailRoad.DataPersistence.Entities;
 using RailRoad.DataPersistence.Repositories;
 using RailRoad.DataPersistenct.EFCore.Repositories;
 using System;
@@ -11,9 +12,11 @@ namespace RailRoad.Services.Sites
     public class SiteManager : ISiteManager
     {
         private ISiteRepository SiteRepository;
+        private ILogger<SiteManager> Logger;
 
-        public SiteManager(ISiteRepository siteRepository)
+        public SiteManager(ILogger<SiteManager> logger, ISiteRepository siteRepository)
         {
+            this.Logger = logger;
             this.SiteRepository = siteRepository;
         }
 
