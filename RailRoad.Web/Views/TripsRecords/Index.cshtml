@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RailRoad.DataPersistence.Entities.TripsRecord>
+<h1>TripsRecords</h1>
+<div class="table-responsive">
+    <table class="table table-hover shadow">
+        <thead>
+            <tr>
+                <td scope="col">Date<br />(dd/mm/yy)</td>
+                <td scope="col">Site</td>
+                <td scope="col">Distance</td>
+                <td scope="col">Trips</td>                
+                <td scope="col">Truck Capacity<br>(in Cubic Metres)</td>
+                <td scope="col">Excavation Charge<br>(in Rs)</td>
+                <td scope="col">LNT 1st Km Charge<br>(in Rs)</td>
+                <td scope="col">LNT Leading Charge<br>(in Rs)</td>
+                <td scope="col">Revenue<br>(in Rs)</td>
+                <td scope="col">Diesel Qunatity<br>(in Ltrs)</td>
+                <td scope="col">Diesel Price<br>(in Rs/Ltrs)</td>
+                <td scope="col">Chainage</td>
+                <td><a asp-action="AddTripsRecord"><input type="button" class="btn-primary rounded" value="New"></a></td>
+            </tr>
+
+        </thead>
+        <tbody>
+            @if(Model?.Count() > 0)
+            {
+                foreach (var tripsRecord in Model)
+                 {
+                    <tr>
+                        <td>@tripsRecord.Date.ToString("dd-MM-yy")</td>
+                        <td>@tripsRecord.Site.Name</td>
+                        <td>@tripsRecord.Distance</td>
+                        <td>@tripsRecord.TripsCount</td>
+                        <td>@tripsRecord.TruckCapacity</td>
+                        <td>@tripsRecord?.TripCharges?.ExcavationCharge</td>
+                        <td>@tripsRecord?.TripCharges?.LntBasicCharge</td>
+                        <td>@tripsRecord?.TripCharges?.LntLeadingCharge</td>
+                        <td>Revenue Here</td>
+                        <td>@tripsRecord?.DieselPrice</td>
+                        <td>@tripsRecord?.DieselQuantity</td>
+                        <td>@tripsRecord?.Chainage</td>
+                        <td><a asp-action=""><input asp-action="" type="button" class="btn-info rounded" value="Details"></a></td>
+                        <td><a asp-action="EditTripsRecord" asp-route-id="@tripsRecord.Id"><input type="button" class="btn-primary rounded" value="Edit"></a></td>
+                        <td>
+                            <a asp-action="DeleteTripsRecord" asp-route-id="@tripsRecord.Id" onclick="return confirm('Are you sure you wish to delete this post?');">
+                                <input type="button" class="btn-danger rounded" value="X">
+                            </a>
+                        </td>
+                    </tr>
+                 }
+            }
+        </tbody>
+    </table>
+</div>

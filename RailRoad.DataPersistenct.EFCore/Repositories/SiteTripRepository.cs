@@ -12,7 +12,7 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
         public DbSet<Site> Sites { get; set; }
         public DbSet<TripsRecord> TripsRecords { get; set; }
 
-        private static string ConnectionString;
+        private string ConnectionString;
 
         public SiteTripRepository(DbContextOptions<SiteTripRepository> dbContextOptions) : base(dbContextOptions)
         {                            
@@ -20,14 +20,19 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
 
         public SiteTripRepository(string connectionString)
         {
-            ConnectionString = connectionString;
+            this.ConnectionString = connectionString;
+        }
+
+        public SiteTripRepository()
+        {
+            this.ConnectionString = "Server = localhost; Database = RailRoad; Uid = root; Pwd = root;";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (ConnectionString != null)
+            if (this.ConnectionString != null)
             {
-                optionsBuilder.UseMySQL(ConnectionString);
+                optionsBuilder.UseMySQL(this.ConnectionString);
             }
             optionsBuilder.UseLoggerFactory(LoggerFactory.Create((builder) => builder.AddConsole()));
             base.OnConfiguring(optionsBuilder);

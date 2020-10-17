@@ -22,24 +22,29 @@
 
             </thead>
             <tbody>
-                @foreach (var site in Model)
+                @if (Model?.Count() > 0)
                 {
-                    <tr>
-                        <td>@site.Name</td>
-                        <td>@site.Distance</td>
-                        <td>@site.DefaultTruckCapacity</td>
-                        <td>@site?.SiteCharges?.ExcavationCharge</td>
-                        <td>@site?.SiteCharges?.LntBasicCharge</td>
-                        <td>@site?.SiteCharges?.LntLeadingCharge</td>
-                        <td><a asp-action=""><input asp-action="" type="button" class="btn-primary rounded" value="Add Trips Data"></a></td>
-                        <td><a asp-action=""><input asp-action="DeleteSite" type="button" class="btn-info rounded" value="Details"></a></td>
-                        <td><a asp-action="EditSite" asp-route-id="@site.Id"><input type="button" class="btn-primary rounded" value="Edit"></a></td>
-                        <td><a asp-action="DeleteSite" asp-route-id="@site.Id" onclick="return confirm('Are you sure you wish to delete this post?');">
-                            <input type="button" class="btn-danger rounded" value="X">
-                            </a></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach (var site in Model)
+                    {
+                        <tr>
+                            <td>@site.Name</td>
+                            <td>@site.Distance</td>
+                            <td>@site.DefaultTruckCapacity</td>
+                            <td>@site?.SiteCharges?.ExcavationCharge</td>
+                            <td>@site?.SiteCharges?.LntBasicCharge</td>
+                            <td>@site?.SiteCharges?.LntLeadingCharge</td>
+                            <td><a asp-action=""><input asp-action="" type="button" class="btn-primary rounded" value="Add Trips Data"></a></td>
+                            <td><a asp-action=""><input asp-action="DeleteSite" type="button" class="btn-info rounded" value="Details"></a></td>
+                            <td><a asp-action="EditSite" asp-route-id="@site.Id"><input type="button" class="btn-primary rounded" value="Edit"></a></td>
+                            <td>
+                                <a asp-action="DeleteSite" asp-route-id="@site.Id" onclick="return confirm('Are you sure you wish to delete this post?');">
+                                    <input type="button" class="btn-danger rounded" value="X">
+                                </a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
