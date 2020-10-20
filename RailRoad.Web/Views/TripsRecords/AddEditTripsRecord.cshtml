@@ -12,54 +12,90 @@
         document.getElementById("input_excavation").value = site.siteCharges.excavationCharge;
         document.getElementById("input_lntBasic").value = site.siteCharges.lntBasicCharge;
         document.getElementById("input_lntLeading").value = site.siteCharges.lntLeadingCharge;
+        document.getElementById("input_siteid").value = site.id;
     }
-    function() {
-        console.log("Hello world");
+    
+    function updateRevenue() {        
+        var revenue = 0;
+        var excavationCharge = +document.getElementById("input_excavation").value;
+        var lntBasic = +document.getElementById("input_lntBasic").value;
+        var lntLeading = +document.getElementById("input_lntLeading").value;
+        var distance = +document.getElementById("input_distance").value;
+        var capacity = +document.getElementById("input_capacity").value;
+        var trips = +document.getElementById("input_trips").value;
+
+        //console.log(excavationCharge);
+        //console.log(lntBasic);
+        //console.log(lntLeading);
+        //console.log(distance);
+        //console.log(capacity);
+        //console.log(trips);
+        //console.log(document.getElementById("excavationDone").checked);
+
+        if (document.getElementById("excavationDone").checked) {            
+            revenue += excavationCharge;             
+        }
+        
+        if (document.getElementById("lntDone").checked) {            
+            revenue += lntBasic;            
+            revenue += lntLeading * (distance - 1);            
+        }
+        
+        revenue = revenue * capacity * trips;        
+        document.getElementById("input_revenue").value = revenue;        
     }
 </script>
 <div class="d-flex justify-content-center">
     <div class="col-md-6 shadow">
         <form method="post" asp-action="AddTripsRecord" asp-controller="TripsRecords" class="form-group">
-            <input hidden asp-for="TripsRecord.Id" value="@Model?.TripsRecord?.Id" class="form-control">
-
+            <input id="input_siteid" hidden asp-for="TripsRecord.SiteId" value="@Model?.TripsRecord?.SiteId" class="form-control">
+            <input hidden asp-for="TripsRecord.Id" value="@Model?.TripsRecord?.Id" class="form-control">            
+            <input hidden asp-for="TripsRecord.TripCharges.Id" value="@Model?.TripsRecord?.TripCharges?.Id" class="form-control">            
+            
             <label asp-for="TripsRecord.Date">Date</label>
             <input asp-for="TripsRecord.Date" value="@Model?.TripsRecord?.Date.ToString("yyyy-MM-ddThh:mm")" class="form-control">
 
             <label asp-for="TripsRecord.TripsCount">Trips Count</label>
-            <input onchange="show()" asp-for="TripsRecord.TripsCount" value="@Model?.TripsRecord?.TripsCount" class="form-control">
+            <input id="input_trips" onchange="updateRevenue()" asp-for="TripsRecord.TripsCount" value="@Model?.TripsRecord?.TripsCount" class="form-control">
 
             <label id="input_site_name" asp-for="TripsRecord.Site">Site</label>
-            <select class="form-control" onchange="onSiteChange(this)" asp-for="TripsRecord.Site.Name" asp-items="new SelectList(@Model?.Sites?.Select(s => s.Name), Model?.SelectedSite?.Name)"></select>
+            <select class="custom-select" onchange="onSiteChange(this)" asp-for="TripsRecord.Site.Name" asp-items="new SelectList(@Model?.Sites?.Select(s => s.Name), Model?.TripsRecord?.Site?.Name)"></select>
 
             <label asp-for="TripsRecord.Distance">Site Distance</label>
-            <input id="input_distance" asp-for="TripsRecord.Distance" value="@Model?.TripsRecord?.Distance" class="form-control">
+            <input id="input_distance" onchange="updateRevenue()" asp-for="TripsRecord.Distance" value="@Model?.TripsRecord?.Distance" class="form-control">
 
             <label asp-for="TripsRecord.TruckCapacity">Truck Capacity</label>
-            <input id="input_capacity" asp-for="TripsRecord.TruckCapacity" value="@Model?.TripsRecord?.TruckCapacity" class="form-control">
+            <input id="input_capacity" onchange="updateRevenue()" asp-for="TripsRecord.TruckCapacity" value="@Model?.TripsRecord?.TruckCapacity" class="form-control">
             <div>
                 <label class="form-check-label" asp-for="TripsRecord.ExcavationDone">Excavation</label>
-                <input class="form-check" asp-for="TripsRecord.ExcavationDone" value="@Model?.TripsRecord?.ExcavationDone">
+                <input onchange="updateRevenue()" id="excavationDone" class="form-check" asp-for="TripsRecord.ExcavationDone" />
             </div>
             <div>
                 <label class="form-check-label" asp-for="TripsRecord.ExcavationDone">Transport</label>
-                <input class="form-check" asp-for="TripsRecord.LntDone" value="@Model?.TripsRecord?.ExcavationDone">
+                <input onchange="updateRevenue()" id="lntDone" class="form-check" asp-for="TripsRecord.LntDone" >
             </div>
             <label asp-for="TripsRecord.TripCharges.ExcavationCharge"> Excavation Charge</label>
-            <input class="form-control" id="input_excavation" asp-for="TripsRecord.TripCharges.ExcavationCharge" value="@Model?.TripsRecord?.TripCharges?.ExcavationCharge">
+            <input id="input_excavation" onchange="updateRevenue()" class="form-control" asp-for="TripsRecord.TripCharges.ExcavationCharge" value="@Model?.TripsRecord?.TripCharges?.ExcavationCharge">
 
             <label asp-for="TripsRecord.TripCharges.LntBasicCharge">LNT Base Charge</label>
-            <input id="input_lntBasic" asp-for="TripsRecord.TripCharges.LntBasicCharge" value="@Model?.TripsRecord?.TripCharges?.LntBasicCharge" class="form-control">
+            <input id="input_lntBasic" onchange="updateRevenue()" asp-for="TripsRecord.TripCharges.LntBasicCharge" value="@Model?.TripsRecord?.TripCharges?.LntBasicCharge" class="form-control">
 
             <label asp-for="TripsRecord.TripCharges.LntLeadingCharge">LNT Leading Charge</label>
-            <input id="input_lntLeading" asp-for="TripsRecord.TripCharges.LntLeadingCharge" value="@Model?.TripsRecord?.TripCharges?.LntBasicCharge" class="form-control">
+            <input id="input_lntLeading" onchange="updateRevenue()" asp-for="TripsRecord.TripCharges.LntLeadingCharge" value="@Model?.TripsRecord?.TripCharges?.LntBasicCharge" class="form-control">
+
+            <label asp-for="TripsRecord.Revenue">Revenue</label>
+            <input id="input_revenue" type="text" value="0"  class="form-control">
 
             <label asp-for="TripsRecord.DieselQuantity">Diesel Quantity</label>
             <input asp-for="TripsRecord.DieselQuantity" value="@Model?.TripsRecord?.DieselQuantity" class="form-control">
 
             <label asp-for="TripsRecord.DieselPrice">Diesel Price</label>
             <input asp-for="TripsRecord.DieselPrice" value="@Model?.TripsRecord?.DieselPrice" class="form-control">
+
+            <label asp-for="TripsRecord.Chainage">Diesel Price</label>
+            <input asp-for="TripsRecord.Chainage" value="@Model?.TripsRecord?.Chainage" class="form-control">
             <br />
-            <input type="submit" value="Add Site" class="btn-primary form-control">
+            <input type="submit" value="Add Record" class="btn-primary form-control">
         </form>
     </div>
 </div>

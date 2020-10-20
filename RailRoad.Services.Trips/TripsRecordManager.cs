@@ -15,11 +15,11 @@ namespace RailRoad.Services.Trips
         private ITripsRecordRepository TripsRecordRepository;
         private ILogger<TripsRecordManager> Logger;
 
-        public TripsRecordManager(ILogger<TripsRecordManager> logger,ITripsRecordRepository tripsRecordRepository)
+        public TripsRecordManager(ILogger<TripsRecordManager> logger, ITripsRecordRepository tripsRecordRepository)
         {
             this.Logger = logger;
             this.TripsRecordRepository = tripsRecordRepository;
-        }        
+        }
 
         public TripsRecord CreateTripsRecord(TripsRecord tripsRecord)
         {
@@ -52,7 +52,7 @@ namespace RailRoad.Services.Trips
                 this.TripsRecordRepository.Dispose();
             }
         }
-        
+
         //public TripsRecord RetrieveTripsRecordWithSite(int id)
         //{
         //    try
@@ -77,7 +77,28 @@ namespace RailRoad.Services.Trips
                 if (orderByDate)
                 {
                     records = records.OrderBy(r => r.Date).ToArray();
-                }                    
+                }
+                return records;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.TripsRecordRepository.Dispose();
+            }
+        }
+
+        public TripsRecord[] RetrieveTripsRecords(bool orderByDate = false, bool includeSiteInfo = false)
+        {
+            try
+            {
+                TripsRecord[] records = this.TripsRecordRepository.RetrieveTripsRecordsWithSiteInfo();
+                if (orderByDate)
+                {
+                    records = records.OrderBy(r => r.Date).ToArray();
+                }
                 return records;
             }
             catch (Exception ex)
@@ -132,7 +153,7 @@ namespace RailRoad.Services.Trips
         {
             try
             {
-                return this.UpdateTripsRecord(tripsRecord);
+                return this.TripsRecordRepository.UpdateTripsRecord(tripsRecord);
             }
             catch (Exception ex)
             {
@@ -148,7 +169,7 @@ namespace RailRoad.Services.Trips
         {
             try
             {
-                return this.DeleteTripsRecord(id);
+                return this.TripsRecordRepository.DeleteTripsRecord(id);
             }
             catch (Exception ex)
             {

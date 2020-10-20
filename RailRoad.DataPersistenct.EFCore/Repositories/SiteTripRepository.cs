@@ -96,12 +96,17 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
 
         public TripsRecord RetrieveTripsRecord(int id)
         {
-            return this.TripsRecords.Find(id);
+            return this.TripsRecords.Include(tr => tr.Site).Include(tr => tr.TripCharges).SingleOrDefault(s => s.Id == id);
         }
 
         public TripsRecord[] RetrieveTripsRecords()
         {
-            return this.TripsRecords.ToArray();
+            return this.TripsRecords.Include(tr => tr.TripCharges).ToArray();
+        }
+
+        public TripsRecord[] RetrieveTripsRecordsWithSiteInfo()
+        {
+            return this.TripsRecords.Include(tr => tr.TripCharges).Include(tr => tr.Site).ToArray();
         }
 
         public Site UpdateSite(Site site)

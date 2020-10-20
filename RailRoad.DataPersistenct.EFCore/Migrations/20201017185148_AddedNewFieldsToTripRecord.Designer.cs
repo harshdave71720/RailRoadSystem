@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RailRoad.DataPersistenct.EFCore.Repositories;
 
 namespace RailRoad.DataPersistenct.EFCore.Migrations
 {
     [DbContext(typeof(SiteTripRepository))]
-    partial class SiteTripRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20201017185148_AddedNewFieldsToTripRecord")]
+    partial class AddedNewFieldsToTripRecord
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,11 +102,11 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
                         .HasColumnName("DISTANCE")
                         .HasColumnType("double");
 
-                    b.Property<short>("ExcavationDone")
+                    b.Property<bool>("ExcavationDone")
                         .HasColumnName("EXCAVATION_DONE")
                         .HasColumnType("bit");
 
-                    b.Property<short>("LntDone")
+                    b.Property<bool>("LntDone")
                         .HasColumnName("LNT_DONE")
                         .HasColumnType("bit");
 

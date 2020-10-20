@@ -34,14 +34,13 @@
                         <td>@tripsRecord?.TripCharges?.ExcavationCharge</td>
                         <td>@tripsRecord?.TripCharges?.LntBasicCharge</td>
                         <td>@tripsRecord?.TripCharges?.LntLeadingCharge</td>
-                        <td>Revenue Here</td>
+                        <td>@tripsRecord?.Revenue</td>
                         <td>@tripsRecord?.DieselPrice</td>
                         <td>@tripsRecord?.DieselQuantity</td>
-                        <td>@tripsRecord?.Chainage</td>
-                        <td><a asp-action=""><input asp-action="" type="button" class="btn-info rounded" value="Details"></a></td>
+                        <td>@tripsRecord?.Chainage</td>                        
                         <td><a asp-action="EditTripsRecord" asp-route-id="@tripsRecord.Id"><input type="button" class="btn-primary rounded" value="Edit"></a></td>
                         <td>
-                            <a asp-action="DeleteTripsRecord" asp-route-id="@tripsRecord.Id" onclick="return confirm('Are you sure you wish to delete this post?');">
+                            <a asp-action="Delete" asp-route-id="@tripsRecord.Id" onclick="return confirm('Are you sure you wish to delete this post?');">
                                 <input type="button" class="btn-danger rounded" value="X">
                             </a>
                         </td>

@@ -47,6 +47,9 @@ namespace RailRoad.DataPersistence.Entities
         [Column("LNT_DONE")]
         public bool LntDone { get; set; }
 
+        [NotMapped]
+        public double Revenue { get; set; }
+
         public Site Site { get; set; }
 
         [Required]
