@@ -73,7 +73,7 @@ namespace RailRoad.Web.Controllers
             {
                 throw new Exception("Site not fount");
             }
-            recordModel.TripsRecord.Site = site;
+            //recordModel.TripsRecord.Site = site;
 
             if (recordModel.TripsRecord.Id > 0)
             {

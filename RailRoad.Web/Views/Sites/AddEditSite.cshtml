@@ -1,24 +1,42 @@
 ﻿@model RailRoad.DataPersistence.Entities.Site
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 <div class="d-flex justify-content-center">
     <div class="col-md-6 shadow">
-        <form method="post" asp-action="AddSite" asp-controller="Sites" class="form-group">
+        <form method="post" asp-action="AddSite" asp-controller="Sites" class="form-group" novalidate>
+            <div asp-validation-summary="ModelOnly"></div>
             <input hidden asp-for="Id" value="@Model?.Id" class="form-control">
+
             <label asp-for="Name">Name</label>
             <input asp-for="Name" value="@Model?.Name" class="form-control">
+            <span asp-validation-for="Name" class="text-danger form-text small"></span>            
+
             <label asp-for="Distance">Site Distance</label>
-            <input asp-for="Distance" value="@Model?.Distance" class="form-control">
+            <input placeholder="Site Name" asp-for="Distance" value="@Model?.Distance" class="form-control">
+            <span asp-validation-for="Distance" class="text-danger form-text small"></span>            
+
             <label asp-for="DefaultTruckCapacity">Truck Capacity</label>
             <input asp-for="DefaultTruckCapacity" value="@Model?.DefaultTruckCapacity" class="form-control">
+            <span asp-validation-for="DefaultTruckCapacity" class="text-danger form-text small"></span>
+
             <input hidden asp-for="SiteCharges.Id" value="@Model?.SiteCharges?.Id" class="form-control">
             <input hidden asp-for="SiteCharges.SiteId" value="@Model?.SiteCharges?.SiteId" class="form-control">
+
             <label asp-for="SiteCharges.ExcavationCharge"> Excavation Charge</label>
             <input asp-for="SiteCharges.ExcavationCharge" value="@Model?.SiteCharges?.ExcavationCharge" class="form-control">
+            <span asp-validation-for="SiteCharges.ExcavationCharge" class="text-danger form-text small"></span>
+
             <label asp-for="SiteCharges.ExcavationCharge">LNT Base Charge</label>
             <input asp-for="SiteCharges.LntBasicCharge" value="@Model?.SiteCharges?.LntBasicCharge" class="form-control">
+            <span asp-validation-for="SiteCharges.LntBasicCharge" class="text-danger form-text small"></span>
+
             <label asp-for="SiteCharges.LntBasicCharge">LNT Leading Charge</label>
             <input asp-for="SiteCharges.LntLeadingCharge" value="@Model?.SiteCharges?.LntLeadingCharge" class="form-control">
+            <span asp-validation-for="SiteCharges.LntLeadingCharge" class="text-danger form-text small"></span>
             <br />
-            <input type="submit" value="Add Site" class="btn-primary form-control">           
+            <button type="submit" class="btn-primary form-control">Add Site</button>
+
         </form>
     </div>
 </div>
