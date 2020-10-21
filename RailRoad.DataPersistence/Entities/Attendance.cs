@@ -19,6 +19,7 @@ namespace RailRoad.DataPersistence.Entities
         [Key]
         [Column("EMPLOYEE_LICENSE", Order = 2)]
         [ForeignKey("Employee")]
+        [MaxLength(30)]
         public string EmployeeLicense { get; set; }
 
         [Required]

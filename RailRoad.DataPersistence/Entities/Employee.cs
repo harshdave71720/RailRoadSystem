@@ -14,19 +14,24 @@ namespace RailRoad.DataPersistence.Entities
         [Required]
         [Key]
         [Column("LICENSE_NUMBER")]
+        [MaxLength(30)]
         public string License { get; set; }
 
         [Required]
         [Column("NAME")]
+        [MaxLength(50)]
         public string Name { get; set; }
 
         [Column("ADHAAR")]
+        [MaxLength(12)]
         public string Adhaar { get; set; }
 
         [Column("MOBILE")]
+        [MaxLength(10)]
         public string Mobile { get; set; }
 
         [Column("ADDRESS")]
+        [MaxLength(200)]
         public string Address { get; set; }
 
         [Required]

@@ -18,6 +18,7 @@ namespace RailRoad.DataPersistence.Entities
         [Key]
         [Column("EMPLOYEE_LICENSE", Order = 2)]
         [ForeignKey("Employee")]
+        [MaxLength(30)]
         public string EmployeeLicense { get; set; }
 
         [Required]
@@ -25,6 +26,7 @@ namespace RailRoad.DataPersistence.Entities
         public double Amount { get; set; }
         
         [Column("DESCRIPTION")]
+        [MaxLength(200)]
         public string Description { get; set; }
 
         [Column("IS_SETTLED")]
