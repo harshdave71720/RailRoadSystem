@@ -10,13 +10,13 @@ namespace RailRoad.DataPersistence.Entities
     [Table("ATTENDANCE")]
     public class Attendance
     {
-        [Key]
+        //[Key]
         [Required]
         [Column("DATE", TypeName = "DATE", Order = 1)]
         public DateTime Date { get; set; }
 
         [Required]
-        [Key]
+        //[Key]
         [Column("EMPLOYEE_LICENSE", Order = 2)]
         [ForeignKey("Employee")]
         [MaxLength(30)]

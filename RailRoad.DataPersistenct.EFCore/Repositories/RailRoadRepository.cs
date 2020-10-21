@@ -44,6 +44,16 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             base.OnConfiguring(optionsBuilder);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Attendance>()
+                .HasKey(a => new { a.Date, a.EmployeeLicense});
+
+            modelBuilder.Entity<EmployeePaymentRecord>()
+                .HasKey(epr => new { epr.Date, epr.EmployeeLicense });
+            base.OnModelCreating(modelBuilder);
+        }
+
         #region ISiteRepository And ITripsRepo Methods        
 
         public Site CreateSite(Site site)
