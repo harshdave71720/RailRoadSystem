@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RailRoad.DataPersistence.Repositories
 {
-    public interface RepositoryBase : IDisposable
+    public interface IRepositoryBase : IDisposable
     {
     }
 }

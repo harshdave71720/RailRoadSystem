@@ -7,28 +7,32 @@ using Microsoft.Extensions.Logging;
 
 namespace RailRoad.DataPersistenct.EFCore.Repositories
 {
-    public class SiteTripRepository : DbContext, ISiteRepository, ITripsRecordRepository
+    public class RailRoadRepository : DbContext, ISiteRepository, ITripsRecordRepository, IEmployeeAttendanceRepo
     {        
         public DbSet<Site> Sites { get; set; }
         public DbSet<TripsRecord> TripsRecords { get; set; }
 
+        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<EmployeePaymentRecord> PaymentRecords { get; set; }
+
+        public DbSet<Attendance> Attendances { get; set; }
+
         private string ConnectionString;
 
-        public SiteTripRepository(DbContextOptions<SiteTripRepository> dbContextOptions) : base(dbContextOptions)
+        public RailRoadRepository(DbContextOptions<RailRoadRepository> dbContextOptions) : base(dbContextOptions)
         {                            
         }
 
-        public SiteTripRepository(string connectionString)
+        public RailRoadRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public SiteTripRepository()
+        public RailRoadRepository()
         {
             this.ConnectionString = "Server = localhost; Database = RailRoad; Uid = root; Pwd = root;";
         }
-
-        #region ISiteRepository And ITripsRepo Methods
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,6 +43,8 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             optionsBuilder.UseLoggerFactory(LoggerFactory.Create((builder) => builder.AddConsole()));
             base.OnConfiguring(optionsBuilder);
         }
+
+        #region ISiteRepository And ITripsRepo Methods        
 
         public Site CreateSite(Site site)
         {
@@ -124,10 +130,53 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             this.SaveChanges();
             return this.RetrieveTripsRecord(tripsRecord.Id);
         }
-
         #endregion
 
-        #region
+        #region IEmployeeAttendanceRepo methods
+        public Employee CreateEmployee(Employee employee)
+        {
+            this.Employees.Add(employee);
+            this.SaveChanges();
+            return employee;
+        }
+
+        public Employee RetrieveEmployee(string license)
+        {
+            return this.Employees.Find(license);
+        }
+
+        public Employee RetrieveEmployeeWithAttendance(string license)
+        {
+            return this.Employees.Include(e => e.Attendances).FirstOrDefault(e => e.License == license);
+        }
+
+        public Employee[] RetrieveEmployees()
+        {
+            return this.Employees.ToArray();
+        }
+
+        public Employee[] RetrieveEmployeesWithAttendance()
+        {
+            return this.Employees.Include(e => e.Attendances).ToArray();
+        }
+
+        public Employee UpdateEmployee(Employee employee)
+        {
+            this.Employees.Update(employee);
+            this.SaveChanges();
+            return employee;
+        }
+
+        public Employee DeleteEmployee(string license)
+        {
+            Employee employee = this.Employees.Find(license);
+            if (employee == null) return employee;
+
+            this.Employees.Remove(employee);           
+            this.SaveChanges();
+            return employee;
+        }
+
 
         #endregion
     }

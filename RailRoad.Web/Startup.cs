@@ -31,13 +31,10 @@ namespace RailRoad.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddControllersWithViews().AddNewtonsoftJson((options) => 
-            {
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;   
-            });
-            services.AddDbContext<SiteTripRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
-            services.AddScoped<ISiteRepository, SiteTripRepository>();
-            services.AddScoped<ITripsRecordRepository, SiteTripRepository>();
+            services.AddControllersWithViews();
+            services.AddDbContext<RailRoadRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
+            services.AddScoped<ISiteRepository, RailRoadRepository>();
+            services.AddScoped<ITripsRecordRepository, RailRoadRepository>();
             services.AddScoped<ISiteManager, SiteManager>();
             services.AddScoped<ITripsRecordManager, TripsRecordManager>();
         }

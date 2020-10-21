@@ -8,7 +8,7 @@ using RailRoad.DataPersistenct.EFCore.Repositories;
 
 namespace RailRoad.DataPersistenct.EFCore.Migrations
 {
-    [DbContext(typeof(SiteTripRepository))]
+    [DbContext(typeof(RailRoadRepository))]
     [Migration("20201015063514_InitialCreate")]
     partial class InitialCreate
     {
