@@ -10,10 +10,12 @@ namespace RailRoad.DataPersistence.Repositories
 
         public TripsRecord CreateTripsRecord(TripsRecord tripsRecord);
 
-        public TripsRecord RetrieveTripsRecord(int id);
+        public TripsRecord RetrieveTripsRecord(int id);        
 
         public TripsRecord[] RetrieveTripsRecords();
-        
+
+        public TripsRecord[] RetrieveTripsRecordsWithSiteInfo();
+
         public TripsRecord UpdateTripsRecord(TripsRecord tripsRecord);
 
         public TripsRecord DeleteTripsRecord(int id);        

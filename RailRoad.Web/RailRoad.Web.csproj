@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RailRoad.Services.Sites\RailRoad.Services.Sites.csproj" />
     <ProjectReference Include="..\RailRoad.Services.Trips\RailRoad.Services.Trips.csproj" />
   </ItemGroup>

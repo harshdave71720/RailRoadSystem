@@ -63,5 +63,11 @@ namespace RailRoad.Web.Controllers
             this.SiteManager.DeleteSite(id);
             return RedirectToAction("Index");
         }
+
+        [Route("AddTrips")]
+        public IActionResult AddTrips(int id)
+        {                       
+            return RedirectToAction("AddTripsRecord", "TripsRecords", new { siteId =id});
+        }
     }
 }

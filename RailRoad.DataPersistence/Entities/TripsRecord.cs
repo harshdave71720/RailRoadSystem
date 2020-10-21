@@ -19,6 +19,10 @@ namespace RailRoad.DataPersistence.Entities
         public DateTime Date { get; set; }
 
         [Required]
+        [Column("DISTANCE")]
+        public double Distance { get; set; }
+
+        [Required]
         [Column("TRIPS_COUNT")]
         public  int TripsCount { get; set; }     
         
@@ -32,8 +36,20 @@ namespace RailRoad.DataPersistence.Entities
 
         [Required]
         [Column("DIESEL_PRICE")]
-        public double DieselPrice { get; set; }        
-        
+        public double DieselPrice { get; set; }
+
+        [Column("CHAINAGE")]
+        public string Chainage { get; set; }
+
+        [Column("EXCAVATION_DONE")]
+        public bool ExcavationDone { get; set; }
+
+        [Column("LNT_DONE")]
+        public bool LntDone { get; set; }
+
+        [NotMapped]
+        public double Revenue { get; set; }
+
         public Site Site { get; set; }
 
         [Required]

@@ -32,7 +32,7 @@ namespace RailRoad.Services.Sites
             }
             finally
             {
-                this.SiteRepository.Dispose();
+                //this.SiteRepository.Dispose();
             }
         }
 
@@ -48,7 +48,7 @@ namespace RailRoad.Services.Sites
             }
             finally
             {
-                this.SiteRepository.Dispose();
+                //this.SiteRepository.Dispose();
             }
         }
 
@@ -64,7 +64,7 @@ namespace RailRoad.Services.Sites
             }
             finally
             {
-                this.SiteRepository.Dispose();
+                //this.SiteRepository.Dispose();
             }
         }
 
@@ -85,7 +85,7 @@ namespace RailRoad.Services.Sites
             }
             finally
             {
-                this.SiteRepository.Dispose();
+                //this.SiteRepository.Dispose();
             }
         }
 
@@ -106,7 +106,7 @@ namespace RailRoad.Services.Sites
             }
             finally
             {
-                this.SiteRepository.Dispose();
+                //this.SiteRepository.Dispose();
             }
         }
 
@@ -128,7 +128,7 @@ namespace RailRoad.Services.Sites
             }
             finally
             {
-                this.SiteRepository.Dispose();
+                //this.SiteRepository.Dispose();
             }
         }
 
@@ -144,7 +144,7 @@ namespace RailRoad.Services.Sites
             }
             finally
             {
-                this.SiteRepository.Dispose();
+                //this.SiteRepository.Dispose();
             }
         }
     }
