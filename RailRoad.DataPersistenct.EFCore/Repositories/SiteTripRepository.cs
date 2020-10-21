@@ -28,6 +28,8 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             this.ConnectionString = "Server = localhost; Database = RailRoad; Uid = root; Pwd = root;";
         }
 
+        #region ISiteRepository And ITripsRepo Methods
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (this.ConnectionString != null)
@@ -122,5 +124,11 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             this.SaveChanges();
             return this.RetrieveTripsRecord(tripsRecord.Id);
         }
+
+        #endregion
+
+        #region
+
+        #endregion
     }
 }
