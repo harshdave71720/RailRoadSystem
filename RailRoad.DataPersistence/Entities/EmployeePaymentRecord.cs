@@ -23,6 +23,12 @@ namespace RailRoad.DataPersistence.Entities
         [Required]
         [Column("AMOUNT")]
         public double Amount { get; set; }
+        
+        [Column("DESCRIPTION")]
+        public string Description { get; set; }
+
+        [Column("IS_SETTLED")]
+        public bool IsSettled { get; set; }
 
         public Employee Employee { get; set; }
     }
