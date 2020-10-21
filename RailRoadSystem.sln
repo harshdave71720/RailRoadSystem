@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.REST.API", "RailRoad.REST.API\RailRoad.REST.API.csproj", "{ED1B8380-5063-4C49-9313-C4AA64E22CCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.REST.API", "RailRoad.REST.API\RailRoad.REST.API.csproj", "{ED1B8380-5063-4C49-9313-C4AA64E22CCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.Services.Trips", "RailRoad.Services.Trips\RailRoad.Services.Trips.csproj", "{F51164ED-5892-4976-961F-E0ACFD0365EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.Services.Trips", "RailRoad.Services.Trips\RailRoad.Services.Trips.csproj", "{F51164ED-5892-4976-961F-E0ACFD0365EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.Services.Sites", "RailRoad.Services.Sites\RailRoad.Services.Sites.csproj", "{B6972ECB-48D8-40A9-A7AA-ECD7CDB6846E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.Services.Sites", "RailRoad.Services.Sites\RailRoad.Services.Sites.csproj", "{B6972ECB-48D8-40A9-A7AA-ECD7CDB6846E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.DataPersistence", "RailRoad.DataPersistence\RailRoad.DataPersistence.csproj", "{26F8717A-469A-43BC-9FD3-823851417E22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.DataPersistence", "RailRoad.DataPersistence\RailRoad.DataPersistence.csproj", "{26F8717A-469A-43BC-9FD3-823851417E22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.Web", "RailRoad.Web\RailRoad.Web.csproj", "{AADB145A-1F73-4BAC-B803-942A9F46D663}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.Web", "RailRoad.Web\RailRoad.Web.csproj", "{AADB145A-1F73-4BAC-B803-942A9F46D663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.DataPersistenct.EFCore", "RailRoad.DataPersistenct.EFCore\RailRoad.DataPersistenct.EFCore.csproj", "{E329B710-78B0-490A-A6ED-E4C025FA7599}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.DataPersistenct.EFCore", "RailRoad.DataPersistenct.EFCore\RailRoad.DataPersistenct.EFCore.csproj", "{E329B710-78B0-490A-A6ED-E4C025FA7599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.Services.Employees", "RailRoad.Services.Employees\RailRoad.Services.Employees.csproj", "{327D5FD5-A11B-491C-8D78-141031DD4BDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E329B710-78B0-490A-A6ED-E4C025FA7599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E329B710-78B0-490A-A6ED-E4C025FA7599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E329B710-78B0-490A-A6ED-E4C025FA7599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327D5FD5-A11B-491C-8D78-141031DD4BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327D5FD5-A11B-491C-8D78-141031DD4BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327D5FD5-A11B-491C-8D78-141031DD4BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327D5FD5-A11B-491C-8D78-141031DD4BDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

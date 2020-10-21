@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using MySql.Data.EntityFrameworkCore.Extensions;
 using RailRoad.DataPersistence.Repositories;
 using RailRoad.DataPersistenct.EFCore.Repositories;
+using RailRoad.Services.Employees;
 using RailRoad.Services.Sites;
 using RailRoad.Services.Trips;
 
@@ -32,11 +33,15 @@ namespace RailRoad.Web
         {
             services.AddControllers();
             services.AddControllersWithViews();
+
             services.AddDbContext<RailRoadRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
             services.AddScoped<ISiteRepository, RailRoadRepository>();
             services.AddScoped<ITripsRecordRepository, RailRoadRepository>();
+            services.AddScoped<IEmployeeAttendanceRepo, RailRoadRepository>();
+
             services.AddScoped<ISiteManager, SiteManager>();
             services.AddScoped<ITripsRecordManager, TripsRecordManager>();
+            services.AddScoped<IEmployeeManager, EmployeeManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
