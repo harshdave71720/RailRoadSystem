@@ -8,7 +8,7 @@ using RailRoad.DataPersistence.Entities;
 using RailRoad.Services.Employees;
 
 namespace RailRoad.Web.Controllers
-{
+{    
     public class EmployeesController : Controller
     {
         private IEmployeeManager EmployeeManager;
@@ -24,7 +24,7 @@ namespace RailRoad.Web.Controllers
         {
             return View(this.EmployeeManager.RetrieveEmployees());
         }
-
+        
         public IActionResult Add()
         {
             return View("AddEditEmployee", new Employee());
@@ -33,7 +33,33 @@ namespace RailRoad.Web.Controllers
         [HttpPost]
         public IActionResult Add(Employee employee)
         {
-            this.EmployeeManager.CreateEmployee(employee);
+            Employee emp = this.EmployeeManager.RetrieveEmployee(employee.License);
+            
+            if (emp != null)
+            {
+                // Not Working for now
+                this.EmployeeManager.UpdateEmployee(employee);
+            }
+            else
+            {
+                this.EmployeeManager.CreateEmployee(employee);
+            }            
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(string license)
+        {
+            Employee employee = this.EmployeeManager.RetrieveEmployee(license);
+            if (employee == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("AddEditEmployee", employee);
+        }
+
+        public IActionResult Delete(string license)
+        {
+            this.EmployeeManager.DeleteEmployee(license);
             return RedirectToAction("Index");
         }
     }

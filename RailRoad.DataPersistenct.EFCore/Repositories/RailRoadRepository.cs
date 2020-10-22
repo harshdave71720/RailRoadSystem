@@ -171,7 +171,7 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
         }
 
         public Employee UpdateEmployee(Employee employee)
-        {
+        {            
             this.Employees.Update(employee);
             this.SaveChanges();
             return employee;

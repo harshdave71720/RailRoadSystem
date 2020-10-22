@@ -7,9 +7,16 @@
             <form method="post" asp-action="Add" asp-controller="Employees" class="form-group" novalidate>
                 <div asp-validation-summary="ModelOnly"></div>
 
-                <label asp-for="License">License Number</label>
-                <input asp-for="License" value="@Model?.License" class="form-control">
-                <span asp-validation-for="License" class="text-danger form-text small"></span>
+                @if (string.IsNullOrEmpty(Model.License))
+                {
+                    <label asp-for="License">License Number</label>
+                    <input asp-for="License" value="@Model?.License" class="form-control">
+                    <span asp-validation-for="License" class="text-danger form-text small"></span>
+                }
+                else 
+                { 
+                    <input hidden asp-for="License" value="@Model?.License" class="form-control">                    
+                }
 
                 <label asp-for="Name">Name</label>
                 <input asp-for="Name" value="@Model?.Name" class="form-control">
