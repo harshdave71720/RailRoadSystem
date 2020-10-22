@@ -152,22 +152,22 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
 
         public Employee RetrieveEmployee(string license)
         {
-            return this.Employees.Find(license);
+            return this.Employees.SingleOrDefault(e => e.License.Equals(license) && e.IsWorking);
         }
 
         public Employee RetrieveEmployeeWithAttendance(string license)
         {
-            return this.Employees.Include(e => e.Attendances).FirstOrDefault(e => e.License == license);
+            return this.Employees.Include(e => e.Attendances).FirstOrDefault(e => e.License.Equals(license) && e.IsWorking);
         }
 
         public Employee[] RetrieveEmployees()
         {
-            return this.Employees.ToArray();
+            return this.Employees.Where(e => e.IsWorking).ToArray();
         }
 
         public Employee[] RetrieveEmployeesWithAttendance()
         {
-            return this.Employees.Include(e => e.Attendances).ToArray();
+            return this.Employees.Include(e => e.Attendances).Where(e => e.IsWorking).ToArray();
         }
 
         public Employee UpdateEmployee(Employee employee)
@@ -182,9 +182,11 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             Employee employee = this.Employees.Find(license);
             if (employee == null) return employee;
 
-            this.Employees.Remove(employee);           
+            employee.IsWorking = false;
+            //this.Employees.Remove(employee);           
+
             this.SaveChanges();
-            return employee;
+            return employee;            
         }
 
 
