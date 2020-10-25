@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RailRoad.Services.Attendance\RailRoad.Services.Attendances.csproj" />
     <ProjectReference Include="..\RailRoad.Services.Employees\RailRoad.Services.Employees.csproj" />
     <ProjectReference Include="..\RailRoad.Services.Sites\RailRoad.Services.Sites.csproj" />
     <ProjectReference Include="..\RailRoad.Services.Trips\RailRoad.Services.Trips.csproj" />

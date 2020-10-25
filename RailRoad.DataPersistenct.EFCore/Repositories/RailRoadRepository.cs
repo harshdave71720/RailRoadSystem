@@ -4,10 +4,11 @@ using RailRoad.DataPersistence.Repositories;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace RailRoad.DataPersistenct.EFCore.Repositories
 {
-    public class RailRoadRepository : DbContext, ISiteRepository, ITripsRecordRepository, IEmployeeAttendanceRepo
+    public class RailRoadRepository : DbContext, ISiteRepository, ITripsRecordRepository, IEmployeeAttendanceRepo, IAttendanceRepository
     {        
         public DbSet<Site> Sites { get; set; }
         public DbSet<TripsRecord> TripsRecords { get; set; }
@@ -189,6 +190,53 @@ namespace RailRoad.DataPersistenct.EFCore.Repositories
             return employee;            
         }
 
+        #endregion
+
+        #region IAttendanceRepository methods
+
+        public Attendance[] RetrieveAttendances(DateTime date)
+        {
+            return this.Attendances.Where(a => a.Date.Date.Equals(date.Date)).ToArray();    
+        }        
+
+        public Attendance[] RetrieveAttendance(string employeeLicense)
+        {
+            return this.Attendances.Where(a => a.EmployeeLicense.Equals(employeeLicense)).ToArray();
+        }
+
+        public Attendance RetrieveAttendance(string employeeLicense, DateTime date)
+        {
+            return this.Attendances.SingleOrDefault(a => a.Date.Date.Equals(date.Date) && a.EmployeeLicense.Equals(employeeLicense));
+        }
+
+        public Attendance CreateAttendance(Attendance attendance)
+        {
+            this.Attendances.Add(attendance);
+            this.SaveChanges();
+            return attendance;
+        }
+
+        public Attendance UpdateAttendance(Attendance attendance)
+        {
+            this.Attendances.Update(attendance);
+            this.SaveChanges();
+            return attendance;
+        }
+
+        public Attendance[] RetrieveAttendancesWithEmployee(DateTime date)
+        {
+            return this.Attendances.Include(a => a.Employee).Where(a => a.Date.Date.Equals(date.Date)).ToArray();
+        }
+
+        public Attendance[] RetrieveAttendanceWithEmployee(string employeeLicense)
+        {
+            return this.Attendances.Include(a => a.Employee).Where(a => a.EmployeeLicense.Equals(employeeLicense)).ToArray();
+        }
+
+        public Attendance RetrieveAttendanceWithEmployee(string employeeLicense, DateTime date)
+        {
+            return this.Attendances.Include(a => a.Employee).SingleOrDefault(a => a.EmployeeLicense.Equals(employeeLicense) && a.Date.Date.Equals(date.Date));
+        }
 
         #endregion
     }

@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.Web", "RailRoad.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.DataPersistenct.EFCore", "RailRoad.DataPersistenct.EFCore\RailRoad.DataPersistenct.EFCore.csproj", "{E329B710-78B0-490A-A6ED-E4C025FA7599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailRoad.Services.Employees", "RailRoad.Services.Employees\RailRoad.Services.Employees.csproj", "{327D5FD5-A11B-491C-8D78-141031DD4BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.Services.Employees", "RailRoad.Services.Employees\RailRoad.Services.Employees.csproj", "{327D5FD5-A11B-491C-8D78-141031DD4BDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailRoad.Services.Attendances", "RailRoad.Services.Attendance\RailRoad.Services.Attendances.csproj", "{DD611EB1-23C5-47C4-9AD4-83498E76F49C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{327D5FD5-A11B-491C-8D78-141031DD4BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{327D5FD5-A11B-491C-8D78-141031DD4BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{327D5FD5-A11B-491C-8D78-141031DD4BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD611EB1-23C5-47C4-9AD4-83498E76F49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD611EB1-23C5-47C4-9AD4-83498E76F49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD611EB1-23C5-47C4-9AD4-83498E76F49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD611EB1-23C5-47C4-9AD4-83498E76F49C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

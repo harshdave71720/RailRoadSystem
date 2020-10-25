@@ -31,7 +31,7 @@ namespace RailRoad.Web.Controllers
                 record.Revenue = this.CalculateRevenue(record); 
             }
             return View(tripsRecords);
-        }
+        }       
 
         [Route("Add")]
         public IActionResult AddTripsRecord()

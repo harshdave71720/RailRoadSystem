@@ -51,10 +51,10 @@
         $(function () {
             $("#btnSubmit").click(function () {
                 var checked_checkboxes = $("#charges input[type=checkbox]:checked");
-                console.log("Inside function");
+                //console.log("Inside function");
                 if (checked_checkboxes.length == 0) {
                     $(".error").html("Atleast one must be selected");
-                    console.log("No checked");
+                    //console.log("No checked");
                     return false;
                 }
                 return true;

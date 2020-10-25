@@ -1,0 +1,70 @@
+﻿@model RailRoad.Web.Models.MarkAttendanceModel
+@*<script>
+        function MarkAttendance(button, status) {
+            if (button.value == "@RailRoad.DataPersistence.Enums.AttendanceStatus.PRESENT") {
+                console.log("Was PResent");
+                button.classList.remove("btn-primary");
+                button.classList.add("btn-danger");
+                button.value = "@RailRoad.DataPersistence.Enums.AttendanceStatus.ABSENT";
+            } else {
+                console.log("Was Absent");
+                button.classList.remove("btn-danger");
+                button.classList.add("btn-primary");
+                button.value = "@RailRoad.DataPersistence.Enums.AttendanceStatus.PRESENT";
+            }
+        }
+    </script>*@
+<div>
+    <h1 class="h1 align-self-center">Attendences</h1>
+    <form method="get" asp-action="MarkAttendance">
+        <input asp-for="Date" value="@Model.Date.ToString("yyyy-MM-ddThh:mm")" />
+        <input type="submit" value="View" class="btn btn-primary">
+    </form>
+    <table class="table table-hover shadow">
+        <thead>
+            <tr>
+                <td>Employee Name</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var attendance in Model.Attendances)
+            {
+            <form id="@attendance.EmployeeLicense" method="post" asp-action="MarkAttendance">
+                <tr>
+                    <td>
+                        @attendance.Employee.Name
+                    </td>
+                    <td>
+                        @*<input id="@attendance.EmployeeLicense" asp-for="@attendance.EmployeeLicense" hidden>
+                @if (attendance.Status == RailRoad.DataPersistence.Enums.AttendanceStatus.PRESENT)
+                {
+                    <input type="button" value="@attendance.Status" class="rounded btn-primary" onclick="MarkAttendance(this)">
+                }
+                else
+                {
+                    <input type="button" value="@attendance.Status" class="rounded btn-danger" onclick="MarkAttendance(this)">
+                }*@
+
+
+                        <input asp-for="@attendance.EmployeeLicense" value="@attendance.EmployeeLicense" hidden>
+                        <input asp-for="@attendance.Date" hidden>
+
+                        @if (attendance.Status == RailRoad.DataPersistence.Enums.AttendanceStatus.PRESENT)
+                        {                            
+                            <input asp-for="@attendance.Status" value="@RailRoad.DataPersistence.Enums.AttendanceStatus.ABSENT" hidden>
+                            <input type="submit" value="@attendance.Status" class="rounded btn-primary" @*onclick="MarkAttendance(this)"*@>
+                        }
+                        else
+                        {
+                            <input asp-for="@attendance.Status" value="@RailRoad.DataPersistence.Enums.AttendanceStatus.PRESENT" hidden>
+                            <input type="submit" value="@attendance.Status" class="rounded btn-danger" @*onclick="MarkAttendance(this)"*@>
+                        }
+
+                    </td>
+                </tr>
+            </form>
+            }
+        </tbody>
+    </table>
+</div>

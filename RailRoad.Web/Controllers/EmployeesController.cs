@@ -61,6 +61,6 @@ namespace RailRoad.Web.Controllers
         {
             this.EmployeeManager.DeleteEmployee(license);
             return RedirectToAction("Index");
-        }
+        }        
     }
 }
