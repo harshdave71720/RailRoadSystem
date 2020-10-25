@@ -141,8 +141,8 @@ namespace RailRoad.Web.Controllers
         [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            this.TripsRecordManager.DeleteTripsRecord(id);
-            return RedirectToAction("Index");
+            int siteId = this.TripsRecordManager.DeleteTripsRecord(id).SiteId;
+            return RedirectToAction("ShowTripsRecords", new { siteId });
         }
 
         private double CalculateRevenue(TripsRecord record)
