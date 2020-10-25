@@ -29,6 +29,8 @@ namespace RailRoad.DataPersistence.Entities
         [Required]
         public SiteCharges SiteCharges { get; set; }        
 
-        public IEnumerable<TripsRecord> TripsRecords { get; set; }     
+        public IEnumerable<TripsRecord> TripsRecords { get; set; }
+
+        public IEnumerable<Employee> Employees { get; set; }   
     }
 }

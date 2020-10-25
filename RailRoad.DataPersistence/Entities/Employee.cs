@@ -45,6 +45,13 @@ namespace RailRoad.DataPersistence.Entities
         [Column("ISWORKING")]
         public bool IsWorking { get; set; }
 
+        [Column("SITE_ID")]
+        [Required]
+        [ForeignKey("Site")]
+        public int SiteId { get; set; }
+
+        public Site Site { get; set; }
+
         public List<Attendance> Attendances { get; set; }
 
         public List<EmployeePaymentRecord> PaymentRecords { get; set; }
