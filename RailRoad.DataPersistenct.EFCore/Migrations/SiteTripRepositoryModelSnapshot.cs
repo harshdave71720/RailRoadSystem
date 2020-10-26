@@ -7,7 +7,7 @@ using RailRoad.DataPersistenct.EFCore.Repositories;
 
 namespace RailRoad.DataPersistenct.EFCore.Migrations
 {
-    [DbContext(typeof(SiteTripRepository))]
+    [DbContext(typeof(RailRoadRepository))]
     partial class SiteTripRepositoryModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -80,10 +80,6 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
                         .HasColumnName("TRIPSRECORD_ID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Chainage")
-                        .HasColumnName("CHAINAGE")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("Date")
                         .HasColumnName("TRIPS_DATE")
                         .HasColumnType("datetime");
@@ -95,18 +91,6 @@ namespace RailRoad.DataPersistenct.EFCore.Migrations
                     b.Property<double>("DieselQuantity")
                         .HasColumnName("DIESEL_QUANTITY")
                         .HasColumnType("double");
-
-                    b.Property<double>("Distance")
-                        .HasColumnName("DISTANCE")
-                        .HasColumnType("double");
-
-                    b.Property<short>("ExcavationDone")
-                        .HasColumnName("EXCAVATION_DONE")
-                        .HasColumnType("bit");
-
-                    b.Property<short>("LntDone")
-                        .HasColumnName("LNT_DONE")
-                        .HasColumnType("bit");
 
                     b.Property<int>("SiteId")
                         .HasColumnName("SITE_ID")

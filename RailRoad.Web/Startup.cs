@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using MySql.Data.EntityFrameworkCore.Extensions;
 using RailRoad.DataPersistence.Repositories;
 using RailRoad.DataPersistenct.EFCore.Repositories;
+using RailRoad.Services.Attendances;
+using RailRoad.Services.Employees;
 using RailRoad.Services.Sites;
 using RailRoad.Services.Trips;
 
@@ -31,15 +33,19 @@ namespace RailRoad.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddControllersWithViews().AddNewtonsoftJson((options) => 
-            {
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;   
-            });
-            services.AddDbContext<SiteTripRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
-            services.AddScoped<ISiteRepository, SiteTripRepository>();
-            services.AddScoped<ITripsRecordRepository, SiteTripRepository>();
+            services.AddControllersWithViews().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddDbContext<RailRoadRepository>((options) => options.UseMySQL(Configuration.GetConnectionString("MySqlLocalDb")));
+            services.AddScoped<ISiteRepository, RailRoadRepository>();
+            services.AddScoped<ITripsRecordRepository, RailRoadRepository>();
+            services.AddScoped<IEmployeeAttendanceRepo, RailRoadRepository>();
+            services.AddScoped<IAttendanceRepository, RailRoadRepository>();
+
             services.AddScoped<ISiteManager, SiteManager>();
             services.AddScoped<ITripsRecordManager, TripsRecordManager>();
+            services.AddScoped<IEmployeeManager, EmployeeManager>();
+            services.AddScoped<IAttendanceManager, AttendanceManager>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

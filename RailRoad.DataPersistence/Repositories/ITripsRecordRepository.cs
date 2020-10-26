@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RailRoad.DataPersistence.Repositories
 {
-    public interface ITripsRecordRepository : RepositoryBase
+    public interface ITripsRecordRepository : IRepositoryBase
     {        
 
         public TripsRecord CreateTripsRecord(TripsRecord tripsRecord);

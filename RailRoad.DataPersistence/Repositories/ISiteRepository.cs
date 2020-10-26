@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RailRoad.DataPersistence.Repositories
 {
-    public interface ISiteRepository : RepositoryBase
+    public interface ISiteRepository : IRepositoryBase
     {
         public Site CreateSite(Site site);
 

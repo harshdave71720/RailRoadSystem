@@ -1,0 +1,56 @@
+﻿@model RailRoad.DataPersistence.Entities.Employee
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6 shadow">
+            <form method="post" asp-action="Add" asp-controller="Employees" class="form-group" novalidate>
+                <div asp-validation-summary="ModelOnly"></div>
+
+                @if (string.IsNullOrEmpty(Model.License))
+                {
+                    <label asp-for="License">License Number</label>
+                    <input asp-for="License" value="@Model?.License" class="form-control">
+                    <span asp-validation-for="License" class="text-danger form-text small"></span>
+                }
+                else 
+                { 
+                    <input hidden asp-for="License" value="@Model?.License" class="form-control">                    
+                }
+
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" value="@Model?.Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger form-text small"></span>
+
+                <label asp-for="Adhaar">Adhaar Number</label>
+                <input asp-for="Adhaar" value="@Model?.Adhaar" class="form-control">
+                <span asp-validation-for="Adhaar" class="text-danger form-text small"></span>
+
+                <label asp-for="Mobile">Mobile Number</label>
+                <input asp-for="Mobile" value="@Model?.Mobile" class="form-control">
+                <span asp-validation-for="Mobile" class="text-danger form-text small"></span>
+
+                @*<input hidden asp-for="Mobile" value="@Model?Mobile" class="form-control">
+        <input hidden asp-for="Mobile" value="@Model?.SiteCharges?.SiteId" class="form-control">*@
+
+
+                <label asp-for="Address">Address</label>
+                <input asp-for="Address" value="@Model?.Address" class="form-control">
+                <span asp-validation-for="Address" class="text-danger form-text small"></span>
+
+                <label asp-for="Salary">Salary</label>
+                <input asp-for="Salary" value="@Model?.Salary" class="form-control">
+                <span asp-validation-for="Salary" class="text-danger form-text small"></span>
+
+                <label asp-for="Designation">Designation</label>
+                <select asp-for="Designation" value="@Model?.Salary" class="form-control" asp-items="@Html.GetEnumSelectList<RailRoad.DataPersistence.Enums.Designation>()"></select>
+                <span asp-validation-for="Salary" class="text-danger form-text small"></span>
+                <br />
+
+                <input asp-for="IsWorking" checked hidden>
+
+                <button type="submit" class="btn-primary form-control">Add Employee</button>
+
+            </form>
+        </div>
+    </div>

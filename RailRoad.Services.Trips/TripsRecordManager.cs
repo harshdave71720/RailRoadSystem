@@ -97,7 +97,7 @@ namespace RailRoad.Services.Trips
                 TripsRecord[] records = this.TripsRecordRepository.RetrieveTripsRecordsWithSiteInfo();
                 if (orderByDate)
                 {
-                    records = records.OrderBy(r => r.Date).ToArray();
+                    records = records.OrderByDescending(r => r.Date).ToArray();
                 }
                 return records;
             }
@@ -135,7 +135,7 @@ namespace RailRoad.Services.Trips
             try
             {
                 TripsRecord[] records = orderByDate ?
-                                       this.TripsRecordRepository.RetrieveTripsRecords().OrderBy(x => x.Date).ToArray() :
+                                       this.TripsRecordRepository.RetrieveTripsRecords().OrderByDescending(x => x.Date).ToArray() :
                                        this.TripsRecordRepository.RetrieveTripsRecords();
                 return records;
             }

@@ -23,25 +23,56 @@ namespace RailRoad.Web.Controllers
             this.SiteManager = siteManager;
         }
 
-        public IActionResult Index()
+        [Route("{siteId}")]
+        public IActionResult ShowTripsRecords(int siteId)
         {
-            TripsRecord[] tripsRecords = TripsRecordManager.RetrieveTripsRecords(true, true) ?? Array.Empty<TripsRecord>();
+            TripsRecord[] tripsRecords = TripsRecordManager.RetrieveTripsRecords(true, true).Where(tr => tr.SiteId == siteId).ToArray() ?? Array.Empty<TripsRecord>();
             foreach (TripsRecord record in tripsRecords) 
             { 
                 record.Revenue = this.CalculateRevenue(record); 
             }
-            return View(tripsRecords);
-        }
+            ViewData["SiteId"] = siteId;
+            return View("Index",tripsRecords);
+        }       
+        
+        //public IActionResult AddTripsRecord()
+        //{
+        //    Site[] sites = this.SiteManager.RetrieveSites(true, true);
+        //    //Site site = this.SiteManager.RetrieveSite(siteId, true);
+        //    Site site = null;
+        //    if (site == null)
+        //    {
+        //        site = sites.FirstOrDefault() ?? new Site() { SiteCharges = new SiteCharges() };
+        //    }
+        //    return View("AddEditTripsRecord", new AddTripsRecordModel
+        //    {
+        //        TripsRecord = new TripsRecord()
+        //        {
+        //            Date = DateTime.Now,
+        //            Distance = site.Distance,
+        //            TruckCapacity = site.DefaultTruckCapacity,
+        //            TripCharges = new TripsRecordCharges
+        //            {
+        //                ExcavationCharge = site.SiteCharges.ExcavationCharge,
+        //                LntBasicCharge = site.SiteCharges.LntBasicCharge,
+        //                LntLeadingCharge = site.SiteCharges.LntLeadingCharge
+        //            },
+        //            ExcavationDone = true,
+        //            LntDone = true
+        //        },
+        //        Sites = sites,
+        //        SelectedSite = sites.FirstOrDefault() ?? new Site()
+        //    });
+        //}
 
-        [Route("Add")]
-        public IActionResult AddTripsRecord()
+        [HttpGet]
+        [Route("Add/{siteId}")]
+        public IActionResult AddTripsRecord(int siteId)
         {
-            Site[] sites = this.SiteManager.RetrieveSites(true, true);
-            //Site site = this.SiteManager.RetrieveSite(siteId, true);
-            Site site = null;
+            Site site = this.SiteManager.RetrieveSite(siteId, true);
             if (site == null)
             {
-                site = sites.FirstOrDefault() ?? new Site() { SiteCharges = new SiteCharges() };
+                throw new Exception("Site Not Found");
             }
             return View("AddEditTripsRecord", new AddTripsRecordModel
             {
@@ -59,13 +90,14 @@ namespace RailRoad.Web.Controllers
                     ExcavationDone = true,
                     LntDone = true
                 },
-                Sites = sites,
-                SelectedSite = sites.FirstOrDefault() ?? new Site()
+                SelectedSite = site,
+                SiteId = site.Id,
+                Sites = new Site[] { site }
             });
         }
-
+        
         [HttpPost]
-        [Route("Add")]
+        [Route("Add/{siteId}")]        
         public IActionResult AddTripsRecord([FromForm] AddTripsRecordModel recordModel)
         {
             Site site = SiteManager.RetrieveSite(recordModel.TripsRecord.SiteId);
@@ -83,7 +115,8 @@ namespace RailRoad.Web.Controllers
             {
                 this.TripsRecordManager.CreateTripsRecord(recordModel.TripsRecord);
             }
-            return RedirectToAction("Index");
+                        
+            return RedirectToAction("ShowTripsRecords", new { siteId = site.Id });
         }
 
         [Route("Edit/{id}")]
@@ -108,8 +141,8 @@ namespace RailRoad.Web.Controllers
         [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            this.TripsRecordManager.DeleteTripsRecord(id);
-            return RedirectToAction("Index");
+            int siteId = this.TripsRecordManager.DeleteTripsRecord(id).SiteId;
+            return RedirectToAction("ShowTripsRecords", new { siteId });
         }
 
         private double CalculateRevenue(TripsRecord record)

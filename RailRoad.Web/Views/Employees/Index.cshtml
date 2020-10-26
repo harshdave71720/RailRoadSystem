@@ -1,0 +1,42 @@
+﻿@model IEnumerable<RailRoad.DataPersistence.Entities.Employee>
+<h1>Employees</h1>
+<div>
+    <table class="table table-hover shadow">
+        <thead>
+            <tr>
+                <td scope="col">Name</td>
+                <td scope="col">License Number</td>
+                <td scope="col">Adhaar Number</td>
+                <td scope="col">Mobile Number<br>(in Rs)</td>
+                <td scope="col">Address</td>
+                <td scope="col">Salary<br>(in Rs)</td>
+                <td scope="col">Designation</td>
+                 <td></td>                   
+                 <td></td>                   
+                 <td><a asp-action="Add"><input type="button" class="btn-primary rounded" value="New"></a></td>
+            </tr>
+        </thead>
+            <tbody>
+                @if(Model?.Count() > 0)
+                @foreach (var employee in Model)
+                {
+                <tr>
+                    <td>@employee?.Name</td>
+                    <td>@employee?.License</td>
+                    <td>@employee?.Adhaar</td>
+                    <td>@employee?.Mobile</td>
+                    <td>@employee?.Address</td>
+                    <td>@employee?.Salary</td>
+                    <td>@employee?.Designation</td>
+                    <td><a asp-action=""><input asp-action="" type="button" class="btn-info rounded" value="Details"></a></td>
+                    <td><a asp-action="Edit" asp-route-license="@employee.License"><input type="button" class="btn-primary rounded" value="Edit"></a></td>
+                    <td>
+                        <a asp-action="Delete" asp-route-license="@employee.License" onclick="return confirm('Are you sure you wish to delete this post?');">
+                            <input type="button" class="btn-danger rounded" value="X">
+                        </a>
+                    </td>                    
+                </tr>
+                }
+            </tbody>
+        </table>
+</div>

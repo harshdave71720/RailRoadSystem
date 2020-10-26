@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<RailRoad.DataPersistence.Entities.TripsRecord>
+
 <h1>TripsRecords</h1>
 <div class="table-responsive">
     <table class="table table-hover shadow">
@@ -16,7 +17,7 @@
                 <td scope="col">Diesel Qunatity<br>(in Ltrs)</td>
                 <td scope="col">Diesel Price<br>(in Rs/Ltrs)</td>
                 <td scope="col">Chainage</td>
-                <td><a asp-action="AddTripsRecord"><input type="button" class="btn-primary rounded" value="New"></a></td>
+                <td><a asp-action="AddTripsRecord" asp-route-siteId="@ViewData["SiteId"]"><input type="button" class="btn-primary rounded" value="New"></a></td>
             </tr>
 
         </thead>
